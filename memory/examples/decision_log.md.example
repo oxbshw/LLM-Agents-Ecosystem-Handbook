@@ -1,0 +1,27 @@
+# ADR-0042: Use pnpm for the monorepo
+
+Date: 2026-03-15
+Status: accepted
+Owner: platform team
+
+## Context
+Our monorepo had drifted to a mix of npm and yarn usage across packages, causing nondeterministic installs and confusing CI cache behavior. We needed one tool, with workspace support and good monorepo ergonomics.
+
+## Decision
+Standardize on **pnpm**. Hard-link store yields fast installs; native workspaces are first-class.
+
+## Alternatives considered
+- **npm workspaces** — workable, but slower installs and weaker store behavior
+- **yarn berry** — capable, but PnP added friction we didn't need
+- **bun** — promising, but too young for our prod constraints (re-evaluate Q3)
+
+## Consequences
+- ✅ Faster CI installs (~3× on cold cache)
+- ✅ Consistent lockfile (`pnpm-lock.yaml`)
+- ❗ Contributors must install pnpm; `make setup` script handles it
+- ❗ Some npm-only packages need `pnpm.overrides`
+
+## Follow-ups
+- Add a CI check that fails if `package-lock.json` or `yarn.lock` is committed
+- Document in `AGENTS.md`
+- Re-evaluate Bun in 2026 Q3

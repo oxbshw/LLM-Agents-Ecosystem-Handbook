@@ -1,0 +1,36 @@
+# ADR-NNNN: {{Title}}
+
+```markdown
+# ADR-NNNN: {{Short title}}
+
+Date: {{YYYY-MM-DD}}
+Status: proposed | accepted | superseded by ADR-XXXX | deprecated
+Owner: {{role / team}}
+
+## Context
+{{What problem are we solving? What constraints apply? 2–4 sentences.}}
+
+## Decision
+{{What we chose, in one paragraph.}}
+
+## Alternatives considered
+- **{{Alt A}}** — {{why not}}
+- **{{Alt B}}** — {{why not}}
+
+## Consequences
+- ✅ {{positive}}
+- ✅ {{positive}}
+- ❗ {{negative or risk}}
+- ❗ {{negative or risk}}
+
+## Follow-ups
+- [ ] {{action item}}
+- [ ] {{action item}}
+```
+
+## Conventions
+
+- File: `memory/decisions/ADR-NNNN-<slug>.md`
+- Number is monotonic
+- Index in `MEMORY.md#decisions` with one-line entry
+- ≤ 1 page; if you need more, write a Design Doc and link the ADR to it

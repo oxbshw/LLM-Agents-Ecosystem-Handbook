@@ -1,0 +1,24 @@
+# 2026-04-12 (episodic log, example)
+
+## 09:14  task  #api
+Started: rewrite `/v1/orders` to support cursor pagination. Plan: add cursor param, keep page-based as deprecated for one release.
+
+## 09:42  decision  #api
+Chose opaque base64 cursors over `id+timestamp`. Reason: easier to evolve later. Alternative: composite. (Run: r-2026-04-12-001)
+
+## 10:08  error  #db
+`alembic upgrade head` failed on staging — NOT NULL on existing rows. Fixed by adding default in same migration. → Promote to MEMORY.md as a convention.
+
+## 10:33  feedback  #user
+User: "always show the migration diff before applying." → Promote to USER.md.
+
+## 11:02  tool-call  web_search  cost=$0.0008  ok
+Searched "alembic conditional NOT NULL backfill" — top result confirmed approach.
+
+## 14:21  pr-open
+Opened PR #312 against main. Tests green. Self-review against `repo-auditor` skill: 0 blockers, 1 warning (TODO note).
+
+## 17:50  end-of-session
+Promotion candidates:
+- "Show migration diff before apply" → USER.md ✓
+- "NOT NULL backfill must include default in same migration" → MEMORY.md#project ✓

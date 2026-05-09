@@ -1,0 +1,25 @@
+# USER.md
+
+> Who the user is and how they like to collaborate. Keep under ~30 lines, focused on *non-obvious* preferences.
+
+## Profile
+- Role: {{e.g., "senior platform engineer"}}
+- Technical level: {{e.g., "expert in Python/Go, beginner in frontend"}}
+- Primary languages / stacks: {{...}}
+
+## Preferences
+- Response length: {{terse / standard / detailed}}
+- Format: {{diffs / prose / tables}}
+- Code style: {{...}}
+
+## Recurring goals
+- {{What the user typically asks for}}
+- {{...}}
+
+## Don't assume
+- {{Common pitfall — e.g., "don't assume internet access"}}
+- {{...}}
+
+## Communication
+- {{Pronouns / language}}
+- {{Time zone — for "today/tomorrow" anchoring}}

@@ -1,117 +1,116 @@
-# Agent Framework Comparison
+# Agent framework comparison
 
-This document expands upon the summary table in the root `README.md`.  It provides more detail on the philosophy, strengths and trade‑offs of each open‑source agent framework.  Star counts are approximate as of July 2025.
+Practical, vendor-neutral overview. The agent framework landscape moves monthly — **always verify against current upstream docs before betting a production system on a single framework.**
 
-## LangGraph
+## At a glance
 
-**Philosophy:** Treat multi‑step agent workflows as a directed acyclic graph (DAG) where each node represents a tool invocation or decision.  This explicit representation makes it easy to debug and branch complex flows.  LangGraph is built as an extension to LangChain and benefits from its ecosystem of connectors【913044646548243†L44-L63】.
+| Framework | Primary use | Lang | Orchestration | MCP | Tracing | Best for | Avoid when |
+|---|---|---|---|---|---|---|---|
+| **OpenAI Agents SDK** | Production agents | Py / JS | Loop + handoffs | ✅ | built-in | OpenAI / Anthropic with shim | Strict vendor neutrality |
+| **LangGraph** | Stateful graphs | Py / JS | Graph | ✅ | LangSmith | Branching, long-running, checkpointed | Linear simple flows |
+| **CrewAI** | Role-based teams | Py | Crew | ✅ | partner | Multi-agent role mental model | Pure single-agent |
+| **AutoGen (AG2)** | Conversational MA + HITL | Py | Event-driven | partial | ✅ | Chat-style multi-agent + humans | Pipeline shapes |
+| **LlamaIndex Workflows / Agents** | Data-first | Py / TS | Workflow | ✅ | ✅ | RAG-heavy, retrieval-driven | Pure orchestration without retrieval |
+| **Pydantic AI** | Type-safe | Py | Loop | ✅ | Logfire | FastAPI-native, schema-first | Heavy dynamic flows |
+| **Smolagents** | Code-loop minis | Py | Code-as-action | partial | basic | Quick automation | Complex multi-step orchestration |
+| **Semantic Kernel** | Skills/plans, enterprise | C# / Py / Java | Plan | ✅ | ✅ | .NET / Microsoft ecosystem | Pure Python startups |
+| **Haystack** | RAG-first | Py | Pipelines | partial | ✅ | NLP / RAG pipelines | Heavy tool-action agents |
+| **DSPy** | Prompt optimization | Py | Module compilation | — | ✅ | Compiled prompts, eval-driven | Hand-tuned prompt iteration |
+| **Strands Agents** | Provider-agnostic | Py | Loop | ✅ | OTEL native | Multi-provider, OpenTelemetry-first | Single-provider simple use |
+| **Vercel AI SDK** | App-layer agents | TS / JS | Stream + tools | ✅ | ✅ | Next.js / app-integrated agents | Backend Python only |
+| **Google ADK** | Hierarchical Gemini agents | Py | Tool tree | ✅ | ✅ | Gemini / Vertex first | Multi-vendor |
 
-**Strengths:**
-- Clear visualisation of workflows, including branching and loops.
-- Integrates seamlessly with LangChain tools and memory modules.
-- Suitable for projects that need deterministic orchestration and reproducibility.
+> Hedging note: framework features change frequently (especially around MCP and tracing). Treat the table as a starting point.
 
-**Trade‑offs:**
-- Requires learning graph concepts; may be overkill for simple linear tasks.
+---
 
-## OpenAI Agents SDK
+## Per-framework notes
 
-**Philosophy:** Provide a structured runtime for building agents that can reason, plan and call tools via the OpenAI API.  Emphasises role‑based communication and integrates deeply with OpenAI models【913044646548243†L64-L80】.
+### OpenAI Agents SDK
+- **Use when**: you want a structured runtime with handoffs, guardrails, tracing, and tool calling out of the box. Anthropic and other providers usable through compatibility layers.
+- **Avoid when**: you need provider-neutral abstractions baked in.
 
-**Strengths:**
-- Native support for OpenAI function calling and model endpoints.
-- Role abstraction simplifies multi‑agent conversations.
-- Built‑in tracing and guardrails to improve reliability.
+### LangGraph
+- **Use when**: workflows have branching, loops, checkpoints, or need explicit graph reasoning. Pairs well with LangChain ecosystem.
+- **Avoid when**: a linear loop will do — graphs are cognitive overhead.
 
-**Trade‑offs:**
-- Less flexible with non‑OpenAI providers.
-- Relies on hosted APIs for production workloads.
+### CrewAI
+- **Use when**: the natural mental model is roles (planner, researcher, writer, reviewer).
+- **Avoid when**: the workflow is single-agent; "crew" abstractions add weight.
 
-## AutoGen (AG2)
+### AutoGen (AG2)
+- **Use when**: event-driven multi-agent conversations, especially with humans in the loop.
+- **Avoid when**: pipeline / DAG structure matches better.
 
-**Philosophy:** Enable event‑driven conversations between specialised agents.  Agents communicate asynchronously, invoking tools and humans as needed【913044646548243†L127-L147】.
+### LlamaIndex Workflows / Agents
+- **Use when**: retrieval is central — heavy RAG, indexing, multi-source data.
+- **Avoid when**: you need orchestration but don't have retrieval.
 
-**Strengths:**
-- Scales to complex tasks by decomposing them into conversations among planner, researcher and executor agents.
-- Supports human‑in‑the‑loop interactions.
-- Active community and high star count.
+### Pydantic AI
+- **Use when**: strict typed IO and tool signatures matter; FastAPI-native teams.
+- **Avoid when**: dynamic, schema-light flows where Pydantic adds friction.
 
-**Trade‑offs:**
-- Setup can be complex for small projects.
-- Limited first‑class support for non‑conversation workflows.
+### Smolagents
+- **Use when**: a small "agent writes code, executes, observes" loop is exactly the shape you need.
+- **Avoid when**: you need durable orchestration, multi-agent, or careful safety primitives.
 
-## CrewAI
+### Semantic Kernel
+- **Use when**: enterprise / Azure / .NET, multilingual SDK matters.
+- **Avoid when**: Python-only startups; community is smaller than LangChain/AutoGen.
 
-**Philosophy:** Model teams of agents (“crew”) with defined roles and memory.  Agents coordinate tasks collaboratively, passing messages and results【913044646548243†L105-L125】.
+### Haystack
+- **Use when**: search + RAG pipelines are the main thing.
+- **Avoid when**: heavy tool-using agents are the focus.
 
-**Strengths:**
-- Simple API to define agent roles and assign tasks.
-- Built‑in error handling and fallback strategies.
-- Good for projects where collaboration among agents mimics human teams.
+### DSPy
+- **Use when**: you want prompts compiled from data and evals; reduces hand-tuning.
+- **Avoid when**: simple, fast iteration on prompts is fine.
 
-**Trade‑offs:**
-- May require custom tooling to integrate with external APIs.
-- Limited support for asynchronous messaging compared to AutoGen.
+### Strands Agents
+- **Use when**: you genuinely need to swap providers and want OpenTelemetry from day one.
+- **Avoid when**: vendor-neutral isn't a real requirement — you'll trade community size.
 
-## Semantic Kernel
+### Vercel AI SDK
+- **Use when**: agent UX lives inside a Next.js or React app.
+- **Avoid when**: backend-only, Python-first stacks.
 
-**Philosophy:** Compose “skills” (functions) into complete plans.  Strong focus on enterprise security, compliance and .NET integration【913044646548243†L150-L169】.
+### Google ADK
+- **Use when**: Gemini / Vertex first, hierarchical tool trees fit your problem.
+- **Avoid when**: heavy multi-vendor needs.
 
-**Strengths:**
-- Supports C#, Python and Java, making it attractive for enterprise developers.
-- Fine‑grained control over plan execution and memory storage.
-- Tight integration with Azure and other Microsoft services.
+---
 
-**Trade‑offs:**
-- The .NET focus may be less appealing to pure Python environments.
-- Smaller community compared to LangChain and AutoGen.
+## How to choose
 
-## LlamaIndex Agents
+```
+Need vendor-neutrality?  ─ Yes ─►  Strands · LangGraph · Pydantic AI · OpenAI Agents SDK (with shim)
+       │ No
+       ▼
+Heavy retrieval?          ─ Yes ─►  LlamaIndex Workflows · Haystack
+       │ No
+       ▼
+Multi-agent roles?        ─ Yes ─►  CrewAI · AutoGen · LangGraph
+       │ No
+       ▼
+TypeScript / app layer?   ─ Yes ─►  Vercel AI SDK
+       │ No
+       ▼
+Default                          ►  OpenAI Agents SDK · LangGraph · Pydantic AI
+```
 
-**Philosophy:** Combine retrieval‑augmented generation with agent behaviours.  Agents use LlamaIndex to access data sources and tools, then reason to produce answers【913044646548243†L171-L191】.
+## Common tradeoffs
 
-**Strengths:**
-- Excellent for data‑centric applications where information retrieval is crucial.
-- Large ecosystem of connectors for databases, vector stores and APIs.
-- Can operate offline for privacy‑sensitive use cases.
+| Tradeoff | Pick |
+|---|---|
+| Speed of iteration vs. structure | Smolagents / Vercel AI SDK ↔ LangGraph / Semantic Kernel |
+| Simplicity vs. flexibility | Pydantic AI ↔ AutoGen |
+| Vendor lock vs. ecosystem maturity | Strands ↔ OpenAI Agents SDK |
+| Code-centric vs. config-centric | Smolagents ↔ CrewAI |
 
-**Trade‑offs:**
-- Requires understanding of retrieval mechanics.
-- May not be necessary for tasks that don’t involve external data.
+## What this comparison won't tell you
 
-## Smolagents
+- Whether a particular framework version has a regression
+- Which one is "best" — it depends on your stack and team
+- Whether MCP support is *deep* or just *present*
 
-**Philosophy:** Provide a minimal, code‑centric agent loop where the LLM writes and executes Python code directly【913044646548243†L82-L103】.
-
-**Strengths:**
-- Lightweight and easy to embed in existing codebases.
-- Ideal for rapid automation of small tasks.
-
-**Trade‑offs:**
-- Lacks orchestration primitives for complex workflows.
-- Less mature ecosystem.
-
-## Strands Agents
-
-**Philosophy:** Offer a model‑agnostic SDK that runs anywhere and integrates with major providers like Amazon Bedrock, Anthropic, OpenAI and Ollama【913044646548243†L194-L214】.
-
-**Strengths:**
-- Flexible provider support and built‑in observability via OpenTelemetry.
-- Suitable for organisations that need to switch models or vendors.
-
-**Trade‑offs:**
-- Smaller community and fewer examples compared to incumbents.
-
-## Pydantic AI
-
-**Philosophy:** Define agent inputs, outputs and tool signatures using Pydantic models to ensure type safety【913044646548243†L216-L232】.
-
-**Strengths:**
-- Strong type validation and error feedback.
-- Familiar developer experience for FastAPI users.
-
-**Trade‑offs:**
-- Overhead of defining schemas may slow rapid prototyping.
-
-
-For a tabular comparison of these frameworks, refer to the table in the root `README.md`.
+Read upstream changelogs before adopting a major version.

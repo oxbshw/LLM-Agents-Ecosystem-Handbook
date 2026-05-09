@@ -1,0 +1,41 @@
+# HUMAN_APPROVAL_POLICY.md
+
+## Principles
+1. **Explicit, not implicit.** No auto-approve on timeout.
+2. **Reversibility-first.** Higher blast radius → higher bar.
+3. **Logged.** Every approval (and denial) is recorded with who, when, why.
+
+## Approval matrix
+
+| Action class | Examples | Approver | Mechanism |
+|---|---|---|---|
+| Informational | search, read, summarize | n/a | none |
+| Drafting | create files, ticket drafts | n/a (auto) | logged |
+| Writes to non-prod | staging deploys, dev DB writes | self-approved by user | inline confirm |
+| Writes to prod | production deploys, prod DB writes | user + 2nd reviewer | out-of-band (PR or chat) |
+| Spend / billing | API calls > ${{X}}, cloud resources | user | inline + budget check |
+| Destructive | deletes, force-push, permission changes | user + 2nd reviewer | inline + audit log |
+
+## Approval request format
+The agent emits:
+```yaml
+approval_request:
+  action: {{tool_name}}
+  arguments: {{...}}
+  rationale: |
+    {{why this action, why now}}
+  reversibility: {{reversible | irreversible}}
+  blast_radius: {{user-only | team | org | public}}
+  preview: |
+    {{dry-run output}}
+```
+
+## Audit log
+- Stored at `logs/approvals/{{YYYY-MM-DD}}.jsonl`
+- Append-only; never overwrite
+- Include: request, decision, decider, timestamp, run_id
+
+## Edge cases
+- **Repeated approval requests for the same action** → batch into a single approval with explicit count
+- **User unavailable** → the agent **does not** proceed; it pauses or surfaces partial results
+- **Approval revoked mid-run** → roll back if possible, otherwise surface state and stop

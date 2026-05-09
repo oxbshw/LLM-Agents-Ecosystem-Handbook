@@ -29,7 +29,15 @@ If you’d like to build your own agent or contribute to the project:
 3. Look at the **Starter** agents under `agents/starter` for inspiration on how to implement simple tasks.
 4. Follow the **Best Practices** in the documentation to learn how to promote and maintain open source projects【806548062083687†L539-L551】.
 
+## Going deeper
+
+Once the basics click, the handbook has a full operating manual ready for you:
+
+- **Agent OS concepts** — [agent_os/README.md](../agent_os/README.md)
+- **Templates** to copy into your project — [templates/](../templates/)
+- **Blueprints** for common agent shapes — [blueprints/](../blueprints/)
+- **Safety + evals** before you ship — [safety/](../safety/), [evals/](../evals/)
+
 ## Need help?
 
-If you run into trouble or have questions, open an issue on GitHub or ask the **Gradio FAQ Bot**.  We welcome feedback from
-everyone, regardless of technical background.
+If you run into trouble or have questions, open an issue on GitHub or ask the **Gradio FAQ Bot**. We welcome feedback from everyone, regardless of technical background.

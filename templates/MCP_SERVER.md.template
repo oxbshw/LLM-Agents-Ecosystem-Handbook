@@ -1,0 +1,52 @@
+# MCP Server: {{server-name}}
+
+> One doc per MCP server the agent uses. Lives at `mcp/{{server-name}}.md`.
+
+## Summary
+{{One paragraph: what this server is, what it exposes, why we use it.}}
+
+## Source
+- Repo: {{URL}}
+- Maintainer: {{...}}
+- Version pinned: {{vX.Y.Z}}
+- Transport: {{stdio | sse | http}}
+
+## Capabilities
+| Tool | Purpose | Risk | Approval |
+|---|---|---|---|
+| `{{tool}}` | {{...}} | Low | none |
+| `{{tool}}` | {{...}} | High | required |
+
+## Resources exposed
+- `{{uri pattern}}` — {{description}}
+
+## Configuration
+```json
+{
+  "command": "{{...}}",
+  "args": ["{{...}}"],
+  "env": {
+    "{{ENV_VAR}}": "{{from .env}}"
+  }
+}
+```
+
+## Required scopes / credentials
+- {{e.g., GitHub PAT with `repo:read`}}
+- Stored in `.env` as `{{ENV_VAR}}`; never committed
+
+## Security review
+- [ ] Source repo audited (commit reviewed: `{{sha}}`)
+- [ ] Permissions follow least-privilege
+- [ ] Network egress reviewed (does the server make external calls?)
+- [ ] Output sanitization in place (treat tool output as untrusted)
+- [ ] Audit logging enabled
+- [ ] Approval gates set for high-risk tools
+
+## Known risks / mitigations
+- {{risk}} → {{mitigation}}
+- {{risk}} → {{mitigation}}
+
+## Observability
+- All calls traced: {{yes/no}}
+- Cost notes: {{...}}

@@ -1,0 +1,56 @@
+---
+name: {{skill-name}}
+description: {{One sentence — used by the model to decide whether to load this skill. Be specific about WHEN it applies, not just what it does.}}
+version: 0.1.0
+---
+
+# {{Skill Name}}
+
+## When to use
+- {{trigger condition 1}}
+- {{trigger condition 2}}
+
+## When NOT to use
+- {{anti-trigger}}
+- {{anti-trigger}}
+
+## Inputs
+| Name | Type | Required | Notes |
+|---|---|---|---|
+| `{{input}}` | string | yes | {{...}} |
+| `{{input}}` | int | no | default {{...}} |
+
+## Outputs
+| Name | Type | Notes |
+|---|---|---|
+| `{{output}}` | markdown | {{...}} |
+
+## Workflow
+1. {{step}}
+2. {{step}} — load `references/{{file}}.md` if {{condition}}
+3. {{step}}
+4. Validate against the success criteria below
+5. Return output
+
+## References
+- [`references/{{file}}.md`](references/{{file}}.md) — {{purpose}}
+- [`references/{{file}}.md`](references/{{file}}.md) — {{purpose}}
+
+(References load only when needed — keep `SKILL.md` itself short.)
+
+## Scripts (optional)
+- [`scripts/{{name}}.py`](scripts/{{name}}.py) — {{purpose}}
+
+## Success criteria
+- {{measurable check 1}}
+- {{measurable check 2}}
+
+## Failure modes
+- {{what goes wrong and what to do about it}}
+
+## Examples
+### Good
+{{...}}
+
+### Bad
+{{...}}

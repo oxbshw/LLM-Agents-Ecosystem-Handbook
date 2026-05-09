@@ -1,0 +1,118 @@
+# LLM Agents Ecosystem Handbook
+
+> A practical operating manual for building, evaluating, securing, and shipping modern LLM agent systems. Modern agents are systems with identity, memory, skills, tools, MCP integrations, guardrails, observability, evals, and a provider strategy — this repo teaches the whole stack with templates, blueprints, runnable adapters, and curated examples.
+
+## Start here
+
+- [README.md](README.md): repository overview, modern agent stack, learning paths
+- [agent_os/README.md](agent_os/README.md): the Agent OS concept — files, layers, conventions
+- [llm_wiki/index.md](llm_wiki/index.md): file map + concept locations for LLM navigation
+- [MIGRATION_AND_PROVIDER_EXPANSION_PLAN.md](MIGRATION_AND_PROVIDER_EXPANSION_PLAN.md): what was merged in 1.0.1 and where
+
+## Concepts (Agent OS)
+
+- [agent_os/agent_identity.md](agent_os/agent_identity.md): SOUL.md, AGENTS.md, USER.md
+- [agent_os/memory_layer.md](agent_os/memory_layer.md): memory model
+- [agent_os/skills_layer.md](agent_os/skills_layer.md): Skills + progressive disclosure
+- [agent_os/mcp_layer.md](agent_os/mcp_layer.md): tools and MCP
+- [agent_os/safety_layer.md](agent_os/safety_layer.md): guardrails, approvals, risk levels
+- [agent_os/observability_layer.md](agent_os/observability_layer.md): traces, metrics, evals
+
+## Providers (24+)
+
+- [providers/README.md](providers/README.md): families, quick start
+- [providers/provider_matrix.md](providers/provider_matrix.md): capability comparison
+- [providers/provider_abstraction.md](providers/provider_abstraction.md): LLMProvider interface
+- [providers/router_patterns.md](providers/router_patterns.md): task-class routing + fallback
+- [providers/local_models.md](providers/local_models.md): Ollama / LM Studio / vLLM / llama.cpp
+- [providers/env_vars.md](providers/env_vars.md): every env var
+- [providers/cost_latency_matrix.md](providers/cost_latency_matrix.md), [providers/model_selection_guide.md](providers/model_selection_guide.md)
+- [providers/examples/](providers/examples/): per-provider runnable adapters + router_example.py
+- Code: [utilities/llm_provider.py](utilities/llm_provider.py), [utilities/provider_config.py](utilities/provider_config.py), [utilities/provider_router.py](utilities/provider_router.py), [utilities/provider_errors.py](utilities/provider_errors.py)
+
+## Skills
+
+- [skills/README.md](skills/README.md), [skills/skill_design_guide.md](skills/skill_design_guide.md)
+- [skills/skill_taxonomy.md](skills/skill_taxonomy.md), [skills/skill_maturity_model.md](skills/skill_maturity_model.md)
+- [skills/skill_packaging.md](skills/skill_packaging.md), [skills/skill_validation.md](skills/skill_validation.md)
+- [skills/skill_vs_tool_vs_mcp.md](skills/skill_vs_tool_vs_mcp.md), [skills/security_checklist.md](skills/security_checklist.md)
+- [skills/awesome_skills_catalog.md](skills/awesome_skills_catalog.md): broader ecosystem
+- [skills/catalog/](skills/catalog/): curated catalog index + per-skill folders
+- [skills/examples/](skills/examples/): research-summarizer, repo-auditor, mcp-security-reviewer, agent-memory-curator
+
+## Memory
+
+- [memory/README.md](memory/README.md), [memory/memory_taxonomy.md](memory/memory_taxonomy.md)
+- [memory/memory_distillation.md](memory/memory_distillation.md), [memory/episodic_memory.md](memory/episodic_memory.md), [memory/semantic_memory.md](memory/semantic_memory.md)
+- [memory/user_memory.md](memory/user_memory.md), [memory/project_memory.md](memory/project_memory.md), [memory/memory_security.md](memory/memory_security.md)
+
+## MCP
+
+- [mcp/README.md](mcp/README.md), [mcp/mcp_basics.md](mcp/mcp_basics.md), [mcp/mcp_architecture.md](mcp/mcp_architecture.md)
+- [mcp/mcp_security.md](mcp/mcp_security.md), [mcp/mcp_approval_flows.md](mcp/mcp_approval_flows.md), [mcp/mcp_vs_function_calling.md](mcp/mcp_vs_function_calling.md)
+- [mcp/mcp_server_catalog.md](mcp/mcp_server_catalog.md), [mcp/examples/](mcp/examples/)
+
+## Prompt engineering
+
+- [prompt_engineering/README.md](prompt_engineering/README.md)
+- [prompt_engineering/agent_prompt_patterns.md](prompt_engineering/agent_prompt_patterns.md), [prompt_engineering/system_prompt_design.md](prompt_engineering/system_prompt_design.md)
+- [prompt_engineering/instruction_hierarchy.md](prompt_engineering/instruction_hierarchy.md), [prompt_engineering/context_engineering.md](prompt_engineering/context_engineering.md)
+- [prompt_engineering/tool_use_prompting.md](prompt_engineering/tool_use_prompting.md), [prompt_engineering/planning_and_reflection.md](prompt_engineering/planning_and_reflection.md)
+- [prompt_engineering/memory_prompting.md](prompt_engineering/memory_prompting.md), [prompt_engineering/prompt_injection_defense.md](prompt_engineering/prompt_injection_defense.md)
+- [prompt_engineering/prompt_eval_methods.md](prompt_engineering/prompt_eval_methods.md), [prompt_engineering/anti_patterns.md](prompt_engineering/anti_patterns.md)
+
+## Coding agents
+
+- [coding_agents/README.md](coding_agents/README.md)
+- [coding_agents/claude_code.md](coding_agents/claude_code.md), [coding_agents/cursor.md](coding_agents/cursor.md), [coding_agents/codex.md](coding_agents/codex.md)
+- [coding_agents/repo_instructions.md](coding_agents/repo_instructions.md), [coding_agents/coding_agent_workflows.md](coding_agents/coding_agent_workflows.md)
+- [coding_agents/safe_refactoring.md](coding_agents/safe_refactoring.md), [coding_agents/review_checklist.md](coding_agents/review_checklist.md)
+- [coding_agents/prompts/](coding_agents/prompts/): repo audit, modernization, feature, bugfix, provider expansion, docs update, release review
+
+## Design docs
+
+- [design_docs/README.md](design_docs/README.md)
+- [design_docs/agent_design_doc.md](design_docs/agent_design_doc.md), [design_docs/technical_design_doc.md](design_docs/technical_design_doc.md)
+- [design_docs/adr_guide.md](design_docs/adr_guide.md), [design_docs/design_review.md](design_docs/design_review.md), [design_docs/rollout_plan.md](design_docs/rollout_plan.md)
+- [design_docs/design_md_spec.md](design_docs/design_md_spec.md): DESIGN.md format spec
+- [design_docs/examples/](design_docs/examples/): research, MCP, memory, provider-router
+
+## Safety
+
+- [safety/README.md](safety/README.md), [safety/guardrails.md](safety/guardrails.md), [safety/human_approval.md](safety/human_approval.md)
+- [safety/tool_risk_levels.md](safety/tool_risk_levels.md), [safety/prompt_injection.md](safety/prompt_injection.md)
+- [safety/data_exfiltration.md](safety/data_exfiltration.md), [safety/secure_agent_checklist.md](safety/secure_agent_checklist.md)
+
+## Observability + evals
+
+- [observability/](observability/): tracing, spans, logging, cost, latency, failure analysis, dashboards
+- [evals/](evals/): design, regression, tool-call, memory, MCP, safety, prompt evals + dataset + rubric
+
+## Templates
+
+- [templates/](templates/): AGENTS, SOUL, MEMORY, USER, TOOLS, SKILL, MCP_SERVER, SYSTEM_PROMPT, AGENT_PROMPT, DESIGN_DOC, ADR, EVAL_PLAN, GUARDRAILS, HUMAN_APPROVAL_POLICY, CODING_AGENT_TASK, REPO_MODERNIZATION_PROMPT, AGENT_RELEASE_CHECKLIST
+
+## Blueprints + examples + checklists
+
+- [blueprints/](blueprints/): 9 production architectures
+- [examples/](examples/): 7 worked workspaces
+- [checklists/](checklists/): 8 quality checklists
+
+## LLM wiki
+
+- [llm_wiki/index.md](llm_wiki/index.md): file map + concept locations
+- [llm_wiki/glossary.md](llm_wiki/glossary.md), [llm_wiki/agent_stack.md](llm_wiki/agent_stack.md)
+- [llm_wiki/framework_matrix.md](llm_wiki/framework_matrix.md), [llm_wiki/memory_matrix.md](llm_wiki/memory_matrix.md), [llm_wiki/mcp_matrix.md](llm_wiki/mcp_matrix.md)
+- [llm_wiki/skills_matrix.md](llm_wiki/skills_matrix.md), [llm_wiki/safety_matrix.md](llm_wiki/safety_matrix.md)
+- [llm_wiki/wiki_pattern.md](llm_wiki/wiki_pattern.md), [llm_wiki/contributor_notes.md](llm_wiki/contributor_notes.md)
+- [docs/llm_readable_docs.md](docs/llm_readable_docs.md)
+
+## Curated catalog (preserved)
+
+- [agents/](agents/): 100+ task-specific agent skeletons
+- [docs/framework_comparison.md](docs/framework_comparison.md), [docs/beginners_guide.md](docs/beginners_guide.md), [docs/best_practices.md](docs/best_practices.md)
+- [tutorials/](tutorials/), [evaluation_frameworks/](evaluation_frameworks/), [complete_apps/](complete_apps/)
+
+## Contributing
+
+- [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), [ROADMAP.md](ROADMAP.md), [CHANGELOG.md](CHANGELOG.md)

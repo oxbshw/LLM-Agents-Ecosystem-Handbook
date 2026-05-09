@@ -1,0 +1,35 @@
+# MEMORY.md
+
+> Index of durable, distilled facts. **Not** a chat log. One line per entry. Date entries with `(YYYY-MM-DD)` so they can be expired.
+
+## Project
+- {{fact}} ({{YYYY-MM-DD}})
+- {{fact}} ({{YYYY-MM-DD}})
+
+## User
+- {{preference}} ({{YYYY-MM-DD}})
+
+## Decisions (ADR-style)
+- {{decision + one-line reason}} ({{YYYY-MM-DD}})
+
+## Open questions
+- {{question — why it's open / who decides}}
+
+## Outdated (queued for cleanup)
+- {{old fact}} — superseded by {{new fact}} ({{YYYY-MM-DD}})
+
+---
+
+## Memory update protocol
+
+1. After a session, write *learnings*, not transcript
+2. One fact per entry, with a date
+3. If a new entry contradicts an existing one, *update* the existing one — don't append
+4. Move stale entries to "Outdated" before deleting (so they're recoverable in `git log`)
+5. Run [agent-memory-curator skill](../skills/examples/agent-memory-curator) periodically
+
+## What does NOT belong here
+- Secrets, tokens, credentials
+- PII without a retention policy
+- Full chat transcripts (those go to `logs/`)
+- Anything derivable from `git log` or current code

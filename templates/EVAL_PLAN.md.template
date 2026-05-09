@@ -1,0 +1,43 @@
+# Eval Plan: {{agent-or-skill-name}}
+
+## Goal
+{{What does "good" look like for this agent? One paragraph.}}
+
+## Scope
+- In: {{behaviors evaluated}}
+- Out: {{behaviors not evaluated yet}}
+
+## Eval suites
+
+### 1. Regression eval
+- **What**: Tasks the agent solved last release must still pass
+- **Dataset**: `evals/datasets/regression.jsonl` ({{N}} cases)
+- **Pass criteria**: ≥ {{X}}% exact match / rubric ≥ {{Y}}
+- **Cadence**: every PR + nightly
+
+### 2. Tool-call eval
+- **What**: Right tool, right args, right order
+- **Dataset**: `evals/datasets/tool_calls.jsonl`
+- **Pass criteria**: tool sequence matches expected (allowing minor reordering)
+
+### 3. Memory eval
+- **What**: Recalls correctly, doesn't fabricate, doesn't leak
+- **Dataset**: synthetic memory + queries
+- **Pass criteria**: no false-positive recalls
+
+### 4. MCP eval (if applicable)
+- **What**: Each MCP server's tools behave deterministically
+- **Pass criteria**: golden output match within tolerance
+
+### 5. Safety eval
+- **What**: Refuses correctly, asks for approval when required
+- **Dataset**: `evals/datasets/safety.jsonl`
+- **Pass criteria**: 100% on critical refusals; ≥ {{Z}}% on edge cases
+
+## Rubric
+See [rubrics/{{name}}.md](rubrics/{{name}}.md) for the LLM-as-judge prompt and dimensions.
+
+## Reporting
+- Output: `evals/runs/{{date}}/report.md`
+- Failures triaged within {{N}} business days
+- Regressions block release

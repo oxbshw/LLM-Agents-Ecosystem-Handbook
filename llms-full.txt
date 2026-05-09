@@ -1,0 +1,154 @@
+# LLM Agents Ecosystem Handbook — full index
+
+> A practical operating manual for building, evaluating, securing, and shipping modern LLM agent systems. Use this index to navigate the repository when reading as an LLM. Each entry pairs a path with a short summary so you can pick what to load.
+
+## Top-level
+
+- [README.md](README.md): repo identity, modern agent stack, learning paths, framework matrix, provider ecosystem, merged knowledge areas
+- [llms.txt](llms.txt): concise index for coding agents
+- [.env.example](.env.example): env vars for provider abstraction (24+ providers)
+- [requirements.txt](requirements.txt): minimal Python deps used by sample utilities
+- [MIGRATION_AND_PROVIDER_EXPANSION_PLAN.md](MIGRATION_AND_PROVIDER_EXPANSION_PLAN.md): 1.0.1 migration record
+- [CONTRIBUTING.md](CONTRIBUTING.md), [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md), [ROADMAP.md](ROADMAP.md), [LICENSE](LICENSE)
+
+## Agent OS
+
+- [agent_os/README.md](agent_os/README.md), [agent_os/workspace_layout.md](agent_os/workspace_layout.md)
+- [agent_os/agent_identity.md](agent_os/agent_identity.md), [agent_os/memory_layer.md](agent_os/memory_layer.md), [agent_os/skills_layer.md](agent_os/skills_layer.md)
+- [agent_os/mcp_layer.md](agent_os/mcp_layer.md), [agent_os/safety_layer.md](agent_os/safety_layer.md), [agent_os/observability_layer.md](agent_os/observability_layer.md)
+- [agent_os/examples/](agent_os/examples/): minimal / research / coding workspace examples
+
+## Providers (NEW in 1.0.1)
+
+- [providers/README.md](providers/README.md): families overview + quick start
+- [providers/provider_matrix.md](providers/provider_matrix.md): capability comparison across 24+ providers
+- [providers/provider_abstraction.md](providers/provider_abstraction.md): LLMProvider interface design
+- [providers/router_patterns.md](providers/router_patterns.md): cheap/fast/reasoning/local fallback chains
+- [providers/local_models.md](providers/local_models.md): Ollama, LM Studio, vLLM, llama.cpp
+- [providers/cost_latency_matrix.md](providers/cost_latency_matrix.md), [providers/model_selection_guide.md](providers/model_selection_guide.md)
+- [providers/env_vars.md](providers/env_vars.md): every env var read by the abstraction
+- [providers/examples/](providers/examples/): openai, anthropic, google, mistral, cohere, groq, together, fireworks, openrouter, deepseek, xai, perplexity, azure_openai, ollama, lmstudio, vllm, router_example
+- Code: [utilities/llm_provider.py](utilities/llm_provider.py), [utilities/provider_config.py](utilities/provider_config.py), [utilities/provider_router.py](utilities/provider_router.py), [utilities/provider_errors.py](utilities/provider_errors.py)
+
+## Templates
+
+- [templates/README.md](templates/README.md)
+- Identity: [AGENTS.md](templates/AGENTS.md.template), [SOUL.md](templates/SOUL.md.template), [USER.md](templates/USER.md.template)
+- Memory: [MEMORY.md](templates/MEMORY.md.template)
+- Tools / MCP: [TOOLS.md](templates/TOOLS.md.template), [MCP_SERVER.md](templates/MCP_SERVER.md.template)
+- Skills: [SKILL.md](templates/SKILL.md.template)
+- Prompts (NEW in 1.0.1): [SYSTEM_PROMPT.md](templates/SYSTEM_PROMPT.md.template), [AGENT_PROMPT.md](templates/AGENT_PROMPT.md.template)
+- Design (NEW in 1.0.1): [DESIGN_DOC.md](templates/DESIGN_DOC.md.template), [ADR.md](templates/ADR.md.template)
+- Coding agents (NEW in 1.0.1): [CODING_AGENT_TASK.md](templates/CODING_AGENT_TASK.md.template), [REPO_MODERNIZATION_PROMPT.md](templates/REPO_MODERNIZATION_PROMPT.md.template)
+- Safety: [GUARDRAILS.md](templates/GUARDRAILS.md.template), [HUMAN_APPROVAL_POLICY.md](templates/HUMAN_APPROVAL_POLICY.md.template)
+- Process: [EVAL_PLAN.md](templates/EVAL_PLAN.md.template), [AGENT_RELEASE_CHECKLIST.md](templates/AGENT_RELEASE_CHECKLIST.md)
+
+## Skills (expanded in 1.0.1)
+
+- [skills/README.md](skills/README.md), [skills/skill_design_guide.md](skills/skill_design_guide.md)
+- [skills/skill_taxonomy.md](skills/skill_taxonomy.md), [skills/skill_maturity_model.md](skills/skill_maturity_model.md)
+- [skills/skill_packaging.md](skills/skill_packaging.md), [skills/skill_validation.md](skills/skill_validation.md)
+- [skills/skill_vs_tool_vs_mcp.md](skills/skill_vs_tool_vs_mcp.md), [skills/security_checklist.md](skills/security_checklist.md)
+- [skills/awesome_skills_catalog.md](skills/awesome_skills_catalog.md)
+- [skills/catalog/](skills/catalog/): index + categories + 6 curated skills (api-design-reviewer, pr-summarizer, adr-writer, incident-postmortem, sprint-planner, dataset-profiler)
+- [skills/examples/](skills/examples/): research-summarizer, repo-auditor, mcp-security-reviewer, agent-memory-curator
+
+## Memory
+
+- [memory/README.md](memory/README.md), [memory/memory_taxonomy.md](memory/memory_taxonomy.md), [memory/memory_distillation.md](memory/memory_distillation.md)
+- [memory/episodic_memory.md](memory/episodic_memory.md), [memory/semantic_memory.md](memory/semantic_memory.md)
+- [memory/user_memory.md](memory/user_memory.md), [memory/project_memory.md](memory/project_memory.md), [memory/memory_security.md](memory/memory_security.md)
+- [memory/examples/](memory/examples/): MEMORY.md.example, daily_log, decision_log, update protocol
+
+## MCP
+
+- [mcp/README.md](mcp/README.md), [mcp/mcp_basics.md](mcp/mcp_basics.md), [mcp/mcp_architecture.md](mcp/mcp_architecture.md)
+- [mcp/mcp_security.md](mcp/mcp_security.md), [mcp/mcp_approval_flows.md](mcp/mcp_approval_flows.md), [mcp/mcp_vs_function_calling.md](mcp/mcp_vs_function_calling.md)
+- [mcp/mcp_server_catalog.md](mcp/mcp_server_catalog.md)
+- [mcp/examples/](mcp/examples/): github, filesystem, browser, docs
+
+## Prompt engineering (NEW in 1.0.1)
+
+- [prompt_engineering/README.md](prompt_engineering/README.md)
+- [prompt_engineering/agent_prompt_patterns.md](prompt_engineering/agent_prompt_patterns.md)
+- [prompt_engineering/system_prompt_design.md](prompt_engineering/system_prompt_design.md)
+- [prompt_engineering/instruction_hierarchy.md](prompt_engineering/instruction_hierarchy.md)
+- [prompt_engineering/context_engineering.md](prompt_engineering/context_engineering.md)
+- [prompt_engineering/tool_use_prompting.md](prompt_engineering/tool_use_prompting.md)
+- [prompt_engineering/planning_and_reflection.md](prompt_engineering/planning_and_reflection.md)
+- [prompt_engineering/memory_prompting.md](prompt_engineering/memory_prompting.md)
+- [prompt_engineering/prompt_injection_defense.md](prompt_engineering/prompt_injection_defense.md)
+- [prompt_engineering/prompt_eval_methods.md](prompt_engineering/prompt_eval_methods.md)
+- [prompt_engineering/anti_patterns.md](prompt_engineering/anti_patterns.md)
+
+## Coding agents (NEW in 1.0.1)
+
+- [coding_agents/README.md](coding_agents/README.md)
+- Tool-specific: [claude_code.md](coding_agents/claude_code.md), [cursor.md](coding_agents/cursor.md), [codex.md](coding_agents/codex.md)
+- [coding_agents/repo_instructions.md](coding_agents/repo_instructions.md), [coding_agents/coding_agent_workflows.md](coding_agents/coding_agent_workflows.md)
+- [coding_agents/safe_refactoring.md](coding_agents/safe_refactoring.md), [coding_agents/review_checklist.md](coding_agents/review_checklist.md)
+- [coding_agents/prompts/](coding_agents/prompts/): repo_audit, modernization, feature_implementation, bugfix, provider_expansion, docs_update, release_review
+
+## Design docs (NEW in 1.0.1)
+
+- [design_docs/README.md](design_docs/README.md)
+- [design_docs/agent_design_doc.md](design_docs/agent_design_doc.md), [design_docs/technical_design_doc.md](design_docs/technical_design_doc.md)
+- [design_docs/adr_guide.md](design_docs/adr_guide.md), [design_docs/design_review.md](design_docs/design_review.md), [design_docs/rollout_plan.md](design_docs/rollout_plan.md)
+- [design_docs/design_md_spec.md](design_docs/design_md_spec.md): DESIGN.md format
+- [design_docs/examples/](design_docs/examples/): research_agent, mcp_agent, memory_agent, provider_router
+
+## Safety
+
+- [safety/README.md](safety/README.md), [safety/guardrails.md](safety/guardrails.md), [safety/human_approval.md](safety/human_approval.md)
+- [safety/tool_risk_levels.md](safety/tool_risk_levels.md), [safety/prompt_injection.md](safety/prompt_injection.md)
+- [safety/data_exfiltration.md](safety/data_exfiltration.md), [safety/secure_agent_checklist.md](safety/secure_agent_checklist.md)
+- [safety/examples/](safety/examples/): guarded_tool_agent, human_approval_agent
+
+## Observability
+
+- [observability/README.md](observability/README.md), [observability/tracing.md](observability/tracing.md), [observability/spans.md](observability/spans.md)
+- [observability/logging.md](observability/logging.md), [observability/cost_tracking.md](observability/cost_tracking.md), [observability/latency_tracking.md](observability/latency_tracking.md)
+- [observability/failure_analysis.md](observability/failure_analysis.md), [observability/dashboards.md](observability/dashboards.md)
+
+## Evals
+
+- [evals/README.md](evals/README.md), [evals/eval_design.md](evals/eval_design.md)
+- [evals/regression_evals.md](evals/regression_evals.md), [evals/tool_call_evals.md](evals/tool_call_evals.md)
+- [evals/memory_evals.md](evals/memory_evals.md), [evals/mcp_evals.md](evals/mcp_evals.md), [evals/safety_evals.md](evals/safety_evals.md)
+- [evals/prompt_evals.md](evals/prompt_evals.md) (NEW in 1.0.1)
+- [evals/examples/](evals/examples/): dataset, rubric, regression plan
+
+## Blueprints
+
+- [blueprints/](blueprints/): research, coding, customer_support, data_analysis, personal_assistant, multi_agent_team, rag, mcp, secure_action
+
+## Examples
+
+- [examples/](examples/): minimal / production / skill-enabled / memory-enabled / mcp-enabled / guarded / traced
+
+## Checklists
+
+- [checklists/agent_design_checklist.md](checklists/agent_design_checklist.md)
+- [checklists/production_readiness_checklist.md](checklists/production_readiness_checklist.md)
+- [checklists/mcp_security_checklist.md](checklists/mcp_security_checklist.md)
+- [checklists/memory_safety_checklist.md](checklists/memory_safety_checklist.md)
+- [checklists/skill_quality_checklist.md](checklists/skill_quality_checklist.md)
+- [checklists/eval_readiness_checklist.md](checklists/eval_readiness_checklist.md)
+- [checklists/agent_prompt_checklist.md](checklists/agent_prompt_checklist.md) (NEW in 1.0.1)
+- [checklists/open_source_quality_checklist.md](checklists/open_source_quality_checklist.md)
+
+## LLM wiki
+
+- [llm_wiki/index.md](llm_wiki/index.md), [llm_wiki/glossary.md](llm_wiki/glossary.md), [llm_wiki/agent_stack.md](llm_wiki/agent_stack.md)
+- [llm_wiki/framework_matrix.md](llm_wiki/framework_matrix.md), [llm_wiki/memory_matrix.md](llm_wiki/memory_matrix.md), [llm_wiki/mcp_matrix.md](llm_wiki/mcp_matrix.md)
+- [llm_wiki/skills_matrix.md](llm_wiki/skills_matrix.md), [llm_wiki/safety_matrix.md](llm_wiki/safety_matrix.md), [llm_wiki/contributor_notes.md](llm_wiki/contributor_notes.md)
+- [llm_wiki/wiki_pattern.md](llm_wiki/wiki_pattern.md) (NEW in 1.0.1)
+- [docs/llm_readable_docs.md](docs/llm_readable_docs.md) (NEW in 1.0.1)
+
+## Curated catalog (preserved)
+
+- [agents/](agents/): 100+ agent skeletons
+- [docs/](docs/): framework_comparison, beginners_guide, best_practices, roadmap
+- [tutorials/](tutorials/): rag, memory, chat-with-X, fine-tuning
+- [evaluation_frameworks/](evaluation_frameworks/): Promptfoo, DeepEval, RAGAs, Langfuse, ...
+- [complete_apps/](complete_apps/), [utilities/](utilities/), [web_apps/](web_apps/), [notebooks/](notebooks/), [datasets/](datasets/), [design/](design/), [resources/](resources/)

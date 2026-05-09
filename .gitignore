@@ -1,0 +1,36 @@
+# Secrets / config
+.env
+.env.*
+!.env.example
+
+# Claude Code local session state
+.claude/settings.local.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# Agent runtime artifacts (gitignored except samples / examples)
+logs/
+!**/examples/**/logs/
+traces/

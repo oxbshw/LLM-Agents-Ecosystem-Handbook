@@ -1,0 +1,25 @@
+# MEMORY.md (example, filled)
+
+> Index of durable, distilled facts. One line per entry.
+
+## Project
+- Monorepo: backend (FastAPI) + frontend (Next.js); shared types in `packages/types` (2026-04-09)
+- We use pnpm, not npm or yarn (2026-03-15)
+- DB migrations via alembic; never modify `versions/` history (2026-02-04)
+- Auth service owned by team Iris; see [memory/semantic/auth_service.md](semantic/auth_service.md) (2026-03-22)
+
+## User
+- Prefers terse responses with diffs over prose (2026-04-15)
+- Senior platform engineer, expert in Python/Go, beginner in frontend (2026-03-01)
+- Time zone: PT; "today/tomorrow" should be PT-anchored (2026-03-01)
+
+## Decisions
+- ADR-0042: pnpm over npm/yarn (2026-03-15) — see memory/decisions/0042-pnpm.md
+- ADR-0051: alembic for migrations, not manual SQL (2026-02-04)
+
+## Open questions
+- Switch TS workspace to Bun? — under evaluation (2026-04-20)
+- Should we extract `packages/types` to a separate repo? — pending
+
+## Outdated
+- ~~Use yarn (2025-09-01)~~ — superseded by "Use pnpm" (2026-03-15)

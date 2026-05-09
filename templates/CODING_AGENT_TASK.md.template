@@ -1,0 +1,55 @@
+# CODING_AGENT_TASK.md (template)
+
+> The task contract you hand a coding agent. Self-contained — the agent doesn't need your conversation history.
+
+```markdown
+# Task: {{Short title}}
+
+## Context
+{{2–3 sentences: why this work matters, what user / system it serves.}}
+
+## Goal
+{{One sentence: what success looks like.}}
+
+## Non-goals
+- {{out-of-scope thing 1}}
+- {{out-of-scope thing 2}}
+
+## Inputs / sources
+- Issue: {{link}}
+- Related PRs: {{links}}
+- Files likely involved: {{paths}}
+- Other docs: {{paths}}
+
+## Definition of done
+- [ ] {{specific outcome 1}}
+- [ ] {{specific outcome 2}}
+- [ ] Tests + lint + typecheck pass
+- [ ] Smallest diff that achieves the goal
+- [ ] PR description complete (Summary / Why / How tested / Risks)
+
+## Constraints
+- One concept per PR
+- No new top-level dependencies without approval
+- High-risk operations (push --force, destructive shell) require approval
+- Stay in scope — surface scope creep as a follow-up issue, don't fold it in
+
+## Risks to call out
+- {{thing that could go wrong}}
+- {{thing not tested}}
+
+## Reference docs
+- AGENTS.md
+- relevant SOUL.md / TOOLS.md
+- {{specific deep dive}}
+```
+
+## When to use this
+
+- Cloud / autonomous coding-agent tasks (Codex cloud, etc.)
+- Long-running CLI sessions where you want a written contract
+- Multi-agent handoffs (planner → worker)
+
+## Tip
+
+The agent reads the task as authoritative. Make the **Definition of done** measurable; vague DoDs produce vague PRs.

@@ -1,0 +1,39 @@
+# GUARDRAILS.md
+
+> Programmatic and policy checks that run *around* the agent loop. This file is the policy; the implementation lives next to the agent runtime.
+
+## Input guardrails
+- Treat all RAG / web / MCP / file content as **untrusted**. Strip executable instructions.
+- Reject inputs that exceed `{{max_tokens}}` tokens.
+- Sanitize URLs (allowlist domains for fetch).
+- PII detection on inputs; redact before logging.
+
+## Output guardrails
+- No secrets in output (regex + entropy checks).
+- No PII unless explicitly requested by the user *and* allowed by policy.
+- Refusal on requests for: {{enumerate categories}}.
+
+## Tool-call guardrails
+- Argument schema validation
+- Dry-run for destructive operations (returns the diff; user approves the actual call)
+- Argument allowlists for sensitive tools (e.g., `git: push` only to non-`main` branches without approval)
+
+## Loop guardrails
+- Max iterations: {{N=20}}
+- Wallclock timeout: {{N=10 min}}
+- Cost ceiling per run: ${{X}}
+- Same-tool-same-args repeat ≥ 3 → break and surface
+
+## Refusal policy
+The agent refuses with this template:
+> "I can't do that here because {{policy reason in one line}}. {{Closest safe alternative}}."
+
+Refusals are **logged** and **counted**; persistent same-category refusals signal a UX bug.
+
+## Escalation
+| Trigger | Action |
+|---|---|
+| Critical-tier tool requested | Pause, request human approval |
+| 3rd same-error retry | Surface to user, stop loop |
+| Cost > 80% ceiling | Warn user, ask before continuing |
+| Guardrail trip | Log, refuse, do not retry silently |

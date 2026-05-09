@@ -1,0 +1,51 @@
+# AGENTS.md
+
+> Repo-specific instructions for any coding agent working in this project. Keep it tool-neutral so Claude Code, Cursor, Codex, Aider, Cline can all use it.
+
+## Project context
+{{One paragraph: what this repo is, who uses it, what shipping looks like.}}
+
+## Stack
+- Language: {{Python 3.11 / TypeScript / …}}
+- Package manager: {{pnpm / uv / poetry / …}}
+- Frameworks: {{FastAPI, Next.js, …}}
+- Test runner: {{pytest / vitest / …}}
+
+## Setup
+```bash
+{{install command}}
+{{env setup}}
+```
+
+## Conventions
+- Code style: {{ruff / prettier / …}}
+- Test rule: every new public function gets a test
+- Commit style: {{conventional commits / Linear-style / …}}
+- Branch naming: `{{prefix/short-description}}`
+
+## Required checks before commit
+```bash
+{{lint command}}
+{{typecheck command}}
+{{test command}}
+```
+
+## Tool usage rules
+- Use `{{preferred CLI}}`; do not invoke `{{forbidden CLI}}`
+- Never modify `.env*`, `*credentials*`, or files in `secrets/`
+
+## PR expectations
+- Title format: `[{{scope}}] {{description}}`
+- Description must include: what changed, why, how tested, risks
+- One concept per PR
+
+## Safety rules
+- No `git push --force` without explicit user instruction
+- No new top-level dependencies without approval
+- No destructive shell commands; ask first
+
+## Where to read more
+- `SOUL.md` — agent identity
+- `MEMORY.md` — durable project memory
+- `TOOLS.md` — allowed tools and risk levels
+- `GUARDRAILS.md` — safety policy

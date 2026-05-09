@@ -1,0 +1,76 @@
+# DESIGN_DOC.md (template)
+
+> One template for both AI-system and general technical design docs.
+
+```markdown
+# Design: {{Title}}
+
+**Author:** {{name}}
+**Date:** {{YYYY-MM-DD}}
+**Status:** draft | reviewing | accepted | rolling-out | shipped | superseded
+
+## Background
+{{What we're solving and why now (3–5 sentences).}}
+
+## Goals
+- {{...}}
+- {{...}}
+
+## Non-goals
+- {{...}}
+- {{...}}
+
+## Proposed design
+{{Diagram + 1–2 paragraphs.}}
+
+## Alternatives considered
+- **{{Alt A}}** — {{why not}}
+- **{{Alt B}}** — {{why not}}
+
+## API / Interface
+{{...}}
+
+## Data model
+{{Schema + retention + isolation.}}
+
+## Failure modes
+{{What goes wrong and how the system behaves.}}
+
+## Performance
+- Latency: target p95 ≤ {{N ms}}
+- Throughput: ≥ {{N rps}}
+- Cost: ≤ {{$ per run}}
+
+## Security
+- Threat model: {{...}}
+- AuthN / AuthZ: {{...}}
+- Secrets: {{...}}
+- PII: {{...}}
+
+## Observability
+- Traces: {{...}}
+- Metrics: {{...}}
+- Alerts: {{...}}
+
+## Rollout
+{{Stages (link to a separate rollout plan if longer than a paragraph).}}
+
+## Risks
+- {{risk}} → {{mitigation}}
+- {{risk}} → {{mitigation}}
+
+---
+
+## AI-shaped additions (only if the system uses or is used by LLMs)
+
+- **Provider strategy:** {{primary + fallbacks, why}}
+- **Cost ceilings:** per-request / per-user / daily
+- **Prompt versioning:** where prompts live, who can change them, eval gate
+- **Memory model:** where it lives, how it's curated, isolation
+- **Eval plan:** suites + thresholds (link)
+- **Injection surface:** untrusted inputs, sanitization
+
+## Open questions
+- {{thing to decide before we ship}}
+- {{...}}
+```

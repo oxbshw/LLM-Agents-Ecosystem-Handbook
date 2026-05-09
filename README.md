@@ -1,341 +1,342 @@
-# LLM Agents & Ecosystem Handbook
+<div align="center">
 
+# LLM Agents Ecosystem Handbook
 
-<p align="center">
-  <a href="https://awesome.re"><img src="https://awesome.re/badge.svg" alt="Awesome"></a>
-  <a href="https://github.com/oxbshw/LLM-Agents-Ecosystem-Handbook/stargazers"><img src="https://img.shields.io/github/stars/oxbshw/LLM-Agents-Ecosystem-Handbook?style=social" alt="GitHub stars"></a>
-  <a href="https://github.com/oxbshw/LLM-Agents-Ecosystem-Handbook/issues"><img src="https://img.shields.io/github/issues/oxbshw/LLM-Agents-Ecosystem-Handbook" alt="Issues"></a>
-  <a href="https://github.com/oxbshw/LLM-Agents-Ecosystem-Handbook/pulls"><img src="https://img.shields.io/github/issues-pr/oxbshw/LLM-Agents-Ecosystem-Handbook" alt="Open PRs"></a>
-  <a href="https://github.com/oxbshw/LLM-Agents-Ecosystem-Handbook/graphs/contributors"><img src="https://img.shields.io/github/contributors/oxbshw/LLM-Agents-Ecosystem-Handbook" alt="Contributors"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License"></a>
-  <a href="https://github.com/oxbshw/LLM-Agents-Ecosystem-Handbook/commits/main"><img src="https://img.shields.io/github/last-commit/oxbshw/LLM-Agents-Ecosystem-Handbook" alt="Last commit"></a>
-</p>
+**A practical operating manual for building, evaluating, securing, and shipping modern LLM agent systems.**
 
-<p align="center"><strong>A unified handbook for building, deploying and understanding LLM agents and the wider ecosystem</strong></p>
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![LLM-Friendly](https://img.shields.io/badge/llms.txt-ready-blue.svg)](llms.txt)
+[![Providers](https://img.shields.io/badge/providers-24%2B-blueviolet)](providers/README.md)
 
-A polished, curated collection of **Large Language Model (LLM) agents**, tutorials and ecosystem insights. This handbook highlights projects that push the boundaries of generative AI, multi-agent collaboration, retrieval-augmented generation (RAG), voice and game agents, and more. It goes beyond simple link aggregation, aiming to be a one-stop reference for building, deploying, and understanding LLM applications across the entire stack.
-
-> **Tip:** If you enjoy this list, please consider starring the repository to help others discover it!
+</div>
 
 ---
 
-## Table of Contents
+> Modern agents are not "a prompt + a tool." They are **systems** — with identity, memory, skills, tools, MCP integrations, guardrails, observability, evals, and a provider strategy. This handbook teaches the whole stack and ships templates, blueprints, runnable adapters, and curated examples you can adopt today.
 
-- [Top Agent Frameworks](#top-agent-frameworks)
-- [Agent Toolkits & Platforms](#agent-toolkits--platforms)
-- [Starter AI Agents](#starter-ai-agents)
-- [Advanced AI & Domain-Specific Agents](#advanced-ai--domain-specific-agents)
-- [Multi-Agent Teams](#multi-agent-teams)
-- [Voice & Game Agents](#voice--game-agents)
-- [RAG & Memory Examples](#rag--memory-examples)
-- [MCP Agent Integrations](#mcp-agent-integrations)
-- [LLM Evaluation Frameworks](#llm-evaluation-frameworks)
-- [Example Projects](#example-projects)
-- [Tutorials & Learning Resources](#tutorials--learning-resources)
-  - [RAG Tutorials](#rag-tutorials)
-  - [Memory Apps Tutorials](#memory-apps-tutorials)
-  - [Chat with X Tutorials](#chat-with-x-tutorials)
-  - [LLM Fine-Tuning Tutorials](#llm-fine-tuning-tutorials)
-- [Other Educational Spaces](#other-educational-spaces)
-- [Unique Features](#unique-features)
-- [Languages & Multilingual Support](#languages--multilingual-support)
-- [Interactive Demos & Resources](#interactive-demos--resources)
-  - [Web Apps](#web-apps)
-  - [Jupyter Notebooks](#jupyter-notebooks)
-- [Datasets & Design Assets](#datasets--design-assets)
-- [Documentation & Roadmap](#documentation--roadmap)
-- [Complete Applications](#complete-applications)
-- [Beginner’s Guide](#beginners-guide)
-- [Contributing](#contributing)
-- [License](#license)
-- [Maintainer](#maintainer)
+## What's in this repo
 
----
+A curated, opinionated, **production-oriented** handbook in seven parts:
 
-## Why this repository stands out
+1. **Concepts** — Agent OS, identity, memory, skills, MCP, safety, observability — every layer of the modern agent stack
+2. **Provider ecosystem** — adapters + docs for **24+ LLM providers** (frontier APIs, fast inference, marketplaces, enterprise clouds, specialty, local runtimes), with a router for fallback chains
+3. **Skills ecosystem** — design guide, taxonomy, maturity model, security checklist, and a curated skill catalog
+4. **Prompt engineering** — agent prompt patterns, instruction hierarchy, context engineering, prompt-injection defense
+5. **Coding-agent workflows** — for Claude Code, Cursor, Codex, Aider, Cline, and custom runtimes — repo instructions, prompts, review checklist, safe refactoring
+6. **Design docs** — agent / technical design docs, ADR guide, design reviews, rollout plans, the `DESIGN.md` machine-readable spec
+7. **Curated catalog** — 100+ existing agent skeletons, framework comparisons, evaluation tools, tutorials — preserved and improved
 
-This curated collection aims to be a **comprehensive resource** for developers and researchers building their own LLM applications. In addition to code examples, it provides:
+## Who this is for
 
-- **Comparative analysis of leading agent frameworks:** A quick matrix contrasting frameworks (LangGraph, AutoGen, CrewAI, Smolagents, etc.) with key features to help you choose.
-- **Guidance on framework selection:** Practical advice based on task complexity, collaboration needs and ecosystem integrations.
-- **LLM evaluation toolbox:** Summaries of tools like Promptfoo, DeepEval, MLflow LLM Evaluate, RAGAs and Langfuse to measure performance and safety.
-- **60+ skeleton projects:** The `agents` folder contains scaffolded agents across many domains (blogging, medical imaging, music generation, multimodal input, news, finance, research, scraping, consultancy, system design, compliance, marketing, scheduling, supply-chain, healthcare, education). Each skeleton includes a `README.md` and `main.py`.
-- **Agent skeleton generator:** [`scripts/create_agent.py`](scripts/create_agent.py) to spin up new agent skeletons in seconds.
-
----
-
-## Top Agent Frameworks
-
-| Framework | Description & Key Features |
+| You are… | Start at |
 |---|---|
-| **LangGraph** | Graph/DAG-based orchestration for complex multi-step workflows. |
-| **OpenAI Agents SDK** | Structured runtime with tool-calling and role-based agents. |
-| **AutoGen (AG2)** | Event-driven multi-agent conversations and human-in-the-loop. |
-| **CrewAI** | Role-based “crew” collaboration with memory and error handling. |
-| **Google AgentKit (ADK)** | Modular Gemini/Vertex AI agent kit with hierarchical tools. |
-| **Dify** | Low-code builder with RAG and function calling. |
-| **LangChain & Tools** | Mature chains, memory and 3rd-party integrations. |
-| **Smolagents** | Minimal, code-centric loop (agents write & execute code). |
-| **Semantic Kernel** | .NET-first skills/plans; enterprise-friendly. |
-| **LlamaIndex Agents** | Retrieval-focused agents for data-heavy apps. |
-| **Strands Agents** | Provider-agnostic SDK with OpenTelemetry. |
-| **Pydantic AI** | Type-safe IO/tool signatures with great DX. |
+| New to agents | [docs/beginners_guide.md](docs/beginners_guide.md) → [agent_os/README.md](agent_os/README.md) |
+| Building a production agent | [blueprints/](blueprints/) → [checklists/production_readiness_checklist.md](checklists/production_readiness_checklist.md) |
+| Picking / wiring providers | [providers/README.md](providers/README.md) → [providers/provider_matrix.md](providers/provider_matrix.md) |
+| Comparing frameworks | [docs/framework_comparison.md](docs/framework_comparison.md) |
+| Adding memory / RAG | [memory/](memory/) → [tutorials/rag_tutorials](tutorials/rag_tutorials) |
+| Adding MCP | [mcp/](mcp/) → [mcp/mcp_security.md](mcp/mcp_security.md) |
+| Designing Skills | [skills/](skills/) → [skills/skill_design_guide.md](skills/skill_design_guide.md) |
+| Working with coding agents | [coding_agents/](coding_agents/) → [coding_agents/prompts/](coding_agents/prompts/) |
+| Writing better prompts | [prompt_engineering/](prompt_engineering/) |
+| Designing & rolling out | [design_docs/](design_docs/) |
+| Hardening safety/evals | [safety/](safety/) → [evals/](evals/) |
+| Coding agent reading this repo | [llms.txt](llms.txt) → [llm_wiki/index.md](llm_wiki/index.md) |
 
 ---
 
-## Agent Toolkits & Platforms
+## Modern Agent Stack
 
-| Project | Description |
-|---|---|
-| **AutoGPT** | Toolkit for autonomous agents (creation, benchmarking, UI/CLI). |
-| **Ollama** | Run LLMs locally across macOS/Windows/Linux/Docker. |
-| **Lobe Chat** | Open-source chat UI with plugins and multimodal support. |
-| **OpenDevin** | Open initiative towards an AI software engineer. |
-| **Open Interpreter** | Natural-language coding & local computer control. |
-| **MetaGPT** | Multi-agent “virtual company” for complex tasks. |
-| **PrivateGPT** | Secure offline Q&A over your documents. |
-| **GPT-Engineer** | From natural-language spec to code. |
-| **LlamaIndex Tools** | Connectors/tools for data agents. |
-| **Flowise** | Drag-and-drop builder for LLM workflows. |
-| **FastChat** | Train/serve/evaluate chatbots. |
-| **Mem0** | Memory layer for personalised LLMs. |
-| **Cal.ai** | Scheduling assistant with email handling. |
-| **Aider** | CLI pair-programming agent with Git integration. |
-| **Jan** | Offline ChatGPT-style desktop app. |
+| Layer | Purpose | Where in this repo |
+|---|---|---|
+| **Model / Provider** | LLM choice + abstraction + routing | [providers/](providers/) |
+| **Orchestration** | Agent loops, planning, handoffs | [docs/framework_comparison.md](docs/framework_comparison.md), [blueprints/](blueprints/) |
+| **Tool** | Function calling and external actions | [agent_os/mcp_layer.md](agent_os/mcp_layer.md) |
+| **MCP** | Standardized external context and tools | [mcp/](mcp/) |
+| **Memory** | Durable user/project/semantic memory | [memory/](memory/) |
+| **Skills** | Reusable, progressive-loading workflows | [skills/](skills/) |
+| **Identity** | Personality, mission, refusal style | [agent_os/agent_identity.md](agent_os/agent_identity.md), [templates/](templates/) |
+| **Prompt** | System prompt design, instruction hierarchy, defenses | [prompt_engineering/](prompt_engineering/) |
+| **Safety** | Guardrails, approvals, policy | [safety/](safety/) |
+| **Observability** | Tracing, spans, cost, latency, evals | [observability/](observability/), [evals/](evals/) |
+| **Deployment** | Shipping agents to production | [design_docs/rollout_plan.md](design_docs/rollout_plan.md) |
+| **Coding-agent harness** | Claude Code, Cursor, Codex, Aider, Cline | [coding_agents/](coding_agents/) |
 
----
-
-## Starter AI Agents
-
-| Agent | Description |
-|---|---|
-| **AI Blog to Podcast Agent** | Convert blog posts into podcasts. |
-| **AI Data Analysis Agent** | Insights from CSV/structured data. |
-| **AI Travel Agent** | Trip itineraries (local/cloud). |
-| **AI Music Generator** | Compose via generative models. |
-| **AI Meme Generator (Browser)** | Creates memes by overlaying captions on images. |
-| **AI Breakup Recovery Agent** | Supportive advice for emotional situations. |
-| **AI Health & Fitness Agent** | Health metrics & coaching. |
-| **Gemini Multimodal Agent** | Text+image multimodal demo. |
+📖 Deep dive: [agent_os/README.md](agent_os/README.md)
 
 ---
 
-## Advanced AI & Domain-Specific Agents
+## Provider ecosystem
 
-| Agent | Description |
-|---|---|
-| **AI Deep Research Agent** | Multi-source research & synthesis. |
-| **AI Consultant Agent** | Domain-expert strategy & advice. |
-| **AI System Architect Agent** | From requirements to architecture. |
-| **AI Lead Generation Agent** | Identify & qualify prospects. |
-| **AI Meeting Agent** | Summaries & action items. |
-| **OpenAI Research Agent** | Research workflows with tools. |
-| **Explainable AI Finance Agent** | Finance with interpretability. |
-| **Web Scraping Agent** | Crawl & extract structured data. |
-| **Document Processing Agent** | OCR + analysis/summarisation. |
-| **Sentiment Analysis Agent** | Classify sentiment at scale. |
-| **Technical Translation Agent** | Preserve domain terminology. |
-| **Research Synthesizer Agent** | RAG + coherent reporting. |
+The handbook ships an `LLMProvider` abstraction with **24+ providers** across six families. Most providers go through a single OpenAI-compatible code path; specialty / local providers are first-class.
 
----
+| Provider type | Examples | Best for |
+|---|---|---|
+| **Frontier APIs** | OpenAI, Anthropic, Google Gemini | Reasoning, tool use, production agents |
+| **Fast inference** | Groq, Cerebras, SambaNova | Low-latency workloads |
+| **Marketplaces** | OpenRouter, Together, Fireworks, DeepInfra | Model choice and routing |
+| **Enterprise clouds** | Azure OpenAI, AWS Bedrock, Vertex AI | Compliance, governance |
+| **Specialty** | xAI, Perplexity, Mistral, Cohere, DeepSeek, Hugging Face, Replicate, NVIDIA NIM, MiniMax | Domain-specific |
+| **Local runtimes** | Ollama, LM Studio, vLLM, llama.cpp | Privacy, cost control, offline dev |
 
-## Multi-Agent Teams
-
-| Team | Description |
-|---|---|
-| **Competitor Intelligence Team** | Market/competitor research & reporting. |
-| **Finance Agent Team** | Budgeting, forecasting and reporting. |
-| **Teaching Agent Team** | Lesson planning, delivery and assessment. |
-| **Multi-Agent Team Demo** | Cross-role collaboration patterns. |
-| **Mixture of Agents Demo** | Specialised agent ensembles. |
-
----
-
-## Voice & Game Agents
-
-| Agent | Description |
-|---|---|
-| **Voice Summary Agent** | Transcribe and summarise audio. |
-| **AI Audio Tour Agent** | Generate audio tours for museums/cities. |
-| **Customer Support Voice Agent** | Handle spoken queries and log issues. |
-| **Voice RAG Agent** | Voice input + retrieval + TTS. |
-| **Tic-Tac-Toe Agent** | Autonomous gameplay template. |
-
----
-
-## RAG & Memory Examples
-
-| Example | Description |
-|---|---|
-| **Agentic RAG with Reasoning** | Retrieval → reasoning → generation. |
-| **Hybrid Search RAG** | Vector + keyword retrieval. |
-| **Vision RAG** | Apply RAG to visual data. |
-| **CRAG (Corrective RAG)** | Human-feedback corrective loop. |
-| **Local RAG Agent** | Fully offline retrieval pipeline. |
-
----
-
-## MCP Agent Integrations
-
-| Agent | Description |
-|---|---|
-| **Browser MCP Agent** | Drive a browser (search/click/forms). |
-| **GitHub MCP Agent** | Read/write/manage repositories. |
-| **Notion MCP Agent** | Create/update/query Notion pages & DBs. |
-| **Travel Planner MCP Agent Team** | Multi-agent trip planning via MCP. |
-
----
-
-## LLM Evaluation Frameworks
-
-See [`evaluation_frameworks/README.md`](evaluation_frameworks/README.md) for details about Promptfoo, DeepEval, MLflow LLM Evaluate, RAGAs, Deepchecks, LangSmith, TruLens, Arize Phoenix and Langfuse.
-
----
-
-## Example Projects
-
-The `agents` directory contains many **agent skeletons** organised by category. Category folders (`starter`, `advanced`, `teams`, `rag`) act as **indexes**, while each agent lives in its own top-level folder under `agents/`.
-
-### Quick picks
-
-- **Summarization Agent** – [agents/summarization_agent](agents/summarization_agent)  
-- **Data Analysis Agent** – [agents/data_analysis_agent](agents/data_analysis_agent)  
-- **Travel Itinerary Agent** – [agents/travel_itinerary_agent](agents/travel_itinerary_agent)  
-- **Voice Assistant Demo** – [agents/voice_agent_demo](agents/voice_agent_demo)  
-- **Meme Generator Agent** – [agents/meme_generator_agent](agents/meme_generator_agent)  
-- **Health & Fitness Agent** – [agents/health_fitness_agent](agents/health_fitness_agent)  
-- **Breakup Recovery Agent** – [agents/breakup_recovery_agent](agents/breakup_recovery_agent)  
-- **AI Blog to Podcast Agent** – [agents/ai_blog_to_podcast_agent](agents/ai_blog_to_podcast_agent)  
-- **AI Medical Imaging Agent** – [agents/ai_medical_imaging_agent](agents/ai_medical_imaging_agent)  
-- **AI Music Generator Agent** – [agents/ai_music_generator_agent](agents/ai_music_generator_agent)  
-- **Local News Agent** – [agents/local_news_agent](agents/local_news_agent)  
-- **Gemini Multimodal Demo** – [agents/gemini_multimodal_agent_demo](agents/gemini_multimodal_agent_demo)
-
----
-
-## Tutorials & Learning Resources
-
-Hands-on tutorials live in [`tutorials/`](tutorials) directory.
-
-- **RAG Tutorials** → [`tutorials/rag_tutorials`](tutorials/rag_tutorials)  
-- **Memory Apps Tutorials** → [`tutorials/memory_apps`](tutorials/memory_apps)  
-- **Chat with X Tutorials** → [`tutorials/chat_with_x_tutorials`](tutorials/chat_with_x_tutorials)  
-- **Fine-Tuning Tutorials** → [`tutorials/fine_tuning_tutorials`](tutorials/fine_tuning_tutorials)
-
----
-
-## Other Educational Spaces
-
-- **Interactive demos & notebooks:** [`web_apps`](web_apps), [`notebooks`](notebooks)  
-- **Datasets & design assets:** [`datasets`](datasets), [`design`](design)  
-- **LLM ecosystem overview:** [`ecosystem/overview.md`](ecosystem/overview.md)  
-- **Complete applications:** [`complete_apps`](complete_apps)
-
----
-
-## Unique Features
-
-- **Educational focus:** Detailed tutorials (RAG, memory, chat with X, fine-tuning) + 60+ scaffolded agents.  
-- **Framework comparison & guidance:** Practical, vendor-neutral advice.  
-- **Agent skeleton generator:** `scripts/create_agent.py`.  
-- **Evaluation toolbox:** Promptfoo, DeepEval, RAGAs, etc.  
-- **Ecosystem breadth:** Training, tools, production, local inference, operations, interpretability.  
-- **Community roadmap:** See [`docs/roadmap.md`](docs/roadmap.md).  
-
----
-
-## Languages & Multilingual Support
-
-We welcome translations. See [`TRANSLATION.md`](TRANSLATION.md). A **Technical Translation Agent** exists under `agents/technical_translation_agent`.
-
----
-
-## Supported LLM Providers
-
-The [`utilities/llm_provider.py`](utilities/llm_provider.py) module provides a
-single `complete()` function that works with multiple cloud LLM providers.
-Switch providers without changing agent code — just set `LLM_PROVIDER`:
-
-| Provider | `LLM_PROVIDER` value | API Key variable | Default model |
-|---|---|---|---|
-| **OpenAI** | `openai` (default) | `OPENAI_API_KEY` | `gpt-4o-mini` |
-| **Anthropic** | `anthropic` | `ANTHROPIC_API_KEY` | `claude-3-5-haiku-20241022` |
-| **MiniMax** | `minimax` | `MINIMAX_API_KEY` | `MiniMax-M2.7` |
-
-**MiniMax** ([platform.minimaxi.com](https://platform.minimaxi.com/)) offers
-the M2.7 and M2.5 model families with a 204 K-token context window via an
-OpenAI-compatible API endpoint at `https://api.minimax.io/v1`.
+Quick start:
 
 ```python
-from utilities.llm_provider import complete
+from utilities import get_provider
+from utilities.provider_router import ProviderRouter
 
-# Use MiniMax M2.7 (set MINIMAX_API_KEY first)
-response = complete(
-    "Summarise the main agent frameworks in the LLM ecosystem.",
-    provider="minimax",
-    model="MiniMax-M2.7",
+# Use any single provider
+out = get_provider("groq").chat(
+    [{"role": "user", "content": "Summarize MCP."}],
+    model="llama-3.1-8b-instant",
 )
-print(response)
+
+# Or route by task class with fallback
+router = ProviderRouter()
+out = router.chat(messages, task_class="cheap")  # Groq → DeepSeek → Together → OpenRouter
+```
+
+📖 [providers/README.md](providers/README.md) • [providers/provider_matrix.md](providers/provider_matrix.md) • [providers/router_patterns.md](providers/router_patterns.md) • [providers/local_models.md](providers/local_models.md)
+
+---
+
+## Repository map
+
+```
+.
+├── README.md • llms.txt • llms-full.txt
+├── agent_os/                ← the Agent OS concept, layers, workspace examples
+├── providers/               ← 24+ provider docs + adapters + router patterns
+├── templates/               ← AGENTS.md / SOUL.md / MEMORY.md / SKILL.md / DESIGN_DOC / ADR / …
+├── skills/                  ← design guide + taxonomy + maturity model + curated catalog + 4 examples
+├── memory/                  ← memory taxonomy, distillation, security, examples
+├── mcp/                     ← MCP basics, architecture, security, server catalog, examples
+├── prompt_engineering/      ← agent prompt patterns, instruction hierarchy, defenses
+├── coding_agents/           ← Claude Code, Cursor, Codex, workflows, prompts, review
+├── design_docs/             ← agent + technical design docs, ADR guide, design.md spec
+├── safety/                  ← guardrails, approvals, prompt injection, secure checklist
+├── observability/           ← tracing, spans, cost/latency, dashboards
+├── evals/                   ← eval design, regression / tool / memory / MCP / safety / prompt
+├── blueprints/              ← production architectures by use case
+├── examples/                ← end-to-end runnable agent workspaces
+├── checklists/              ← agent design, prod readiness, MCP security, …
+├── llm_wiki/                ← LLM-friendly index, glossary, matrices, wiki pattern
+├── docs/                    ← framework comparison, best practices, beginners' guide
+├── tutorials/               ← RAG, memory, fine-tuning, chat-with-X
+├── utilities/               ← LLMProvider + router + provider_config
+├── agents/                  ← 100+ curated agent skeletons (preserved)
+├── complete_apps/, web_apps/, notebooks/, datasets/, design/, resources/, scripts/, tests/, ecosystem/
+└── .github/                 ← issue / PR templates
 ```
 
 ---
 
-## Interactive Demos & Resources
+## Skills ecosystem
 
-### Web Apps
+A curated, in-repo catalog plus a clear taxonomy and maturity model:
 
-- **Streamlit Summariser** – [`web_apps/streamlit_summarizer`](web_apps/streamlit_summarizer) (supports `openai`, `anthropic`, `minimax` via `LLM_PROVIDER`)
-- **Gradio FAQ Bot** – [`web_apps/gradio_faq_bot`](web_apps/gradio_faq_bot)
+- [skills/skill_design_guide.md](skills/skill_design_guide.md) — write triggers the model picks
+- [skills/skill_vs_tool_vs_mcp.md](skills/skill_vs_tool_vs_mcp.md) — when to use which
+- [skills/skill_taxonomy.md](skills/skill_taxonomy.md) — domains, tags, risk
+- [skills/skill_maturity_model.md](skills/skill_maturity_model.md) — experimental → production
+- [skills/skill_packaging.md](skills/skill_packaging.md) — ship a portable skill
+- [skills/skill_validation.md](skills/skill_validation.md) — lint / smoke / eval
+- [skills/awesome_skills_catalog.md](skills/awesome_skills_catalog.md) — broader ecosystem map
+- [skills/catalog/](skills/catalog/) — index + per-domain skills
+- [skills/examples/](skills/examples/) — four full reference skills
 
-### Jupyter Notebooks
-
-- **Getting Started** – [`notebooks/getting_started.ipynb`](notebooks/getting_started.ipynb)
-
----
-
-## Datasets & Design Assets
-
-- **Sample dataset** – [`datasets/sample_products.csv`](datasets/sample_products.csv) (+ [`datasets/README.md`](datasets/README.md))  
-- **Architecture diagram** – [`design/architecture_diagram.png`](design/architecture_diagram.png) (+ [`design/README.md`](design/README.md))
+Curated skills shipped: research-summarizer, repo-auditor, mcp-security-reviewer, agent-memory-curator, api-design-reviewer, pr-summarizer, adr-writer, incident-postmortem, sprint-planner, dataset-profiler.
 
 ---
 
-## Documentation & Roadmap
+## Prompt engineering
 
-- **Best practices** – [`docs/best_practices.md`](docs/best_practices.md)  
-- **Framework comparison** – [`docs/framework_comparison.md`](docs/framework_comparison.md)  
-- **Evaluation frameworks guide** – [`evaluation_frameworks/README.md`](evaluation_frameworks/README.md)  
-- **Quickstart** – [`tutorials/quickstart.md`](tutorials/quickstart.md)  
-- **Roadmap** – [`docs/roadmap.md`](docs/roadmap.md)  
-- **Changelog** – [`CHANGELOG.md`](CHANGELOG.md)
+A dedicated section, agent-focused:
+
+- [prompt_engineering/agent_prompt_patterns.md](prompt_engineering/agent_prompt_patterns.md)
+- [prompt_engineering/system_prompt_design.md](prompt_engineering/system_prompt_design.md)
+- [prompt_engineering/instruction_hierarchy.md](prompt_engineering/instruction_hierarchy.md)
+- [prompt_engineering/context_engineering.md](prompt_engineering/context_engineering.md)
+- [prompt_engineering/tool_use_prompting.md](prompt_engineering/tool_use_prompting.md)
+- [prompt_engineering/planning_and_reflection.md](prompt_engineering/planning_and_reflection.md)
+- [prompt_engineering/memory_prompting.md](prompt_engineering/memory_prompting.md)
+- [prompt_engineering/prompt_injection_defense.md](prompt_engineering/prompt_injection_defense.md)
+- [prompt_engineering/prompt_eval_methods.md](prompt_engineering/prompt_eval_methods.md)
+- [prompt_engineering/anti_patterns.md](prompt_engineering/anti_patterns.md)
+
+Templates: [SYSTEM_PROMPT](templates/SYSTEM_PROMPT.md.template), [AGENT_PROMPT](templates/AGENT_PROMPT.md.template). Checklist: [agent_prompt_checklist](checklists/agent_prompt_checklist.md).
 
 ---
 
-## Complete Applications
+## Use this repo with coding agents
 
-- **Task Planner** – [`complete_apps/task_planner`](complete_apps/task_planner)  
-- **Health Coach** – [`complete_apps/health_coach`](complete_apps/health_coach)
+The handbook is *itself* a great surface for coding agents. Drop your favorite tool (Claude Code, Cursor, Codex, Aider, Cline) into the repo:
+
+- [llms.txt](llms.txt) gives the agent an index in 30 seconds
+- [coding_agents/](coding_agents/) has tool-specific notes + prompts
+- [coding_agents/prompts/](coding_agents/prompts/) — repo audit, modernization, feature, bugfix, provider expansion, docs update, release review
+- [templates/CODING_AGENT_TASK.md.template](templates/CODING_AGENT_TASK.md.template) — task contract template
+- [templates/REPO_MODERNIZATION_PROMPT.md.template](templates/REPO_MODERNIZATION_PROMPT.md.template) — multi-phase modernization
+
+The guidance is **tool-neutral**: same `AGENTS.md`, same workflows, regardless of harness.
 
 ---
 
-## Beginner’s Guide
+## Design docs
 
-If you’re new to LLMs, start here → [`docs/beginners_guide.md`](docs/beginners_guide.md)
+Agent + technical design docs, ADRs, reviews, rollouts, and the `DESIGN.md` machine-readable spec for design tokens:
+
+- [design_docs/agent_design_doc.md](design_docs/agent_design_doc.md)
+- [design_docs/technical_design_doc.md](design_docs/technical_design_doc.md)
+- [design_docs/adr_guide.md](design_docs/adr_guide.md)
+- [design_docs/design_review.md](design_docs/design_review.md)
+- [design_docs/rollout_plan.md](design_docs/rollout_plan.md)
+- [design_docs/design_md_spec.md](design_docs/design_md_spec.md)
+- [design_docs/examples/](design_docs/examples/) — research / MCP / memory / provider-router worked examples
+
+Templates: [DESIGN_DOC](templates/DESIGN_DOC.md.template), [ADR](templates/ADR.md.template).
+
+---
+
+## Frameworks at a glance
+
+| Framework | Best for | Lang | MCP | Tracing |
+|---|---|---|---|---|
+| OpenAI Agents SDK | Production agents | Py / JS | ✅ | ✅ built-in |
+| LangGraph | Stateful, branching graphs | Py / JS | ✅ | ✅ LangSmith |
+| CrewAI | Role-based teams | Py | ✅ | ⚠️ via partners |
+| AutoGen (AG2) | Event-driven multi-agent + HITL | Py | ⚠️ partial | ✅ |
+| LlamaIndex Workflows | Data-heavy / RAG-first | Py / TS | ✅ | ✅ |
+| Pydantic AI | Type-safe, FastAPI-native | Py | ✅ | ✅ Logfire |
+| Smolagents | Code-execution mini-agents | Py | ⚠️ | basic |
+| Semantic Kernel | .NET / enterprise / Azure | C# / Py / Java | ✅ | ✅ |
+| DSPy | Programmatic prompt optimization | Py | — | ✅ |
+| Strands Agents | Provider-agnostic, OpenTelemetry | Py | ✅ | ✅ OTEL |
+| Vercel AI SDK | App-layer agents in Next.js | TS / JS | ✅ | ✅ |
+| Google ADK | Gemini / Vertex hierarchical tools | Py | ✅ | ✅ |
+
+📖 Full comparison + decision tree: [docs/framework_comparison.md](docs/framework_comparison.md). Capability tags hedged: verify against current upstream docs.
+
+---
+
+## Skills, MCP, and Memory in one minute
+
+- **Skills** are reusable, model-loaded *workflows* (`SKILL.md` + scripts + references). Use when a task is repeatable, multi-step, and benefits from progressive disclosure. → [skills/](skills/)
+- **MCP** (Model Context Protocol) is a *standard* for exposing tools/context to any agent. Use when integrations should be reusable (GitHub, filesystem, browser, internal APIs). → [mcp/](mcp/)
+- **Memory** is *durable state* across runs (`MEMORY.md`, vector stores, decision logs). → [memory/](memory/)
+
+A useful rule of thumb:
+
+| If the thing is… | Use |
+|---|---|
+| A repeatable workflow with steps and references | **Skill** |
+| An external system with tools to call | **MCP** server |
+| State that should outlive the current run | **Memory** |
+| A single function the model needs once | Plain **tool** |
+
+📖 Decision matrix: [skills/skill_vs_tool_vs_mcp.md](skills/skill_vs_tool_vs_mcp.md)
+
+---
+
+## Guardrails & safety
+
+Production agents need risk-tiered tool controls and human approval gates for high-impact actions.
+
+| Risk level | Examples | Approval |
+|---|---|---|
+| **Low** | read-only search, summarization | none |
+| **Medium** | drafting files, creating tickets | sometimes |
+| **High** | sending email, modifying repos, running shell | required |
+| **Critical** | deleting data, spending money, changing permissions | always + audit |
+
+📖 [safety/README.md](safety/README.md) • [safety/prompt_injection.md](safety/prompt_injection.md) • [safety/secure_agent_checklist.md](safety/secure_agent_checklist.md)
+
+---
+
+## Observability & evals
+
+You cannot ship what you cannot measure. The handbook ships:
+
+- A tracing primer ([observability/tracing.md](observability/tracing.md)) and span model ([observability/spans.md](observability/spans.md))
+- Cost / latency / failure analysis playbooks
+- Eval design + datasets ([evals/](evals/)): regression, tool-call, memory, MCP, safety, **prompt** evals
+- A curated guide to [evaluation_frameworks](evaluation_frameworks/) — Promptfoo, DeepEval, RAGAs, Langfuse, Phoenix, TruLens, LangSmith, MLflow
+
+---
+
+## Templates (copy-paste ready)
+
+| File | Purpose |
+|---|---|
+| [AGENTS.md](templates/AGENTS.md.template) | Repo-specific agent instructions |
+| [SOUL.md](templates/SOUL.md.template) | Identity, voice, values, refusal style |
+| [MEMORY.md](templates/MEMORY.md.template) | Durable project + user memory index |
+| [USER.md](templates/USER.md.template) | User profile and preferences |
+| [TOOLS.md](templates/TOOLS.md.template) | Allowed/restricted/approval-gated tools |
+| [SKILL.md](templates/SKILL.md.template) | Skill spec with progressive loading |
+| [MCP_SERVER.md](templates/MCP_SERVER.md.template) | Documenting an MCP integration |
+| [SYSTEM_PROMPT.md](templates/SYSTEM_PROMPT.md.template) | Long-lived system prompt |
+| [AGENT_PROMPT.md](templates/AGENT_PROMPT.md.template) | Per-task / per-session prompt |
+| [DESIGN_DOC.md](templates/DESIGN_DOC.md.template) | Agent / technical design doc |
+| [ADR.md](templates/ADR.md.template) | Architecture Decision Record |
+| [EVAL_PLAN.md](templates/EVAL_PLAN.md.template) | What you'll evaluate and how |
+| [GUARDRAILS.md](templates/GUARDRAILS.md.template) | Policy, refusals, escalation |
+| [HUMAN_APPROVAL_POLICY.md](templates/HUMAN_APPROVAL_POLICY.md.template) | Who approves what |
+| [CODING_AGENT_TASK.md](templates/CODING_AGENT_TASK.md.template) | Task contract for coding agents |
+| [REPO_MODERNIZATION_PROMPT.md](templates/REPO_MODERNIZATION_PROMPT.md.template) | Multi-phase modernization |
+| [AGENT_RELEASE_CHECKLIST.md](templates/AGENT_RELEASE_CHECKLIST.md) | Ship/no-ship gate |
+
+---
+
+## Merged knowledge areas (1.0.1)
+
+This release **merged seven external projects** into the handbook. Each was adapted (not bulk-copied) into the structure above:
+
+| Source theme | Lives in |
+|---|---|
+| Skills catalog + taxonomy patterns | [skills/](skills/) — taxonomy, maturity, packaging, validation, awesome catalog |
+| Personal-wiki / self-maintaining KB | [llm_wiki/wiki_pattern.md](llm_wiki/wiki_pattern.md), [docs/llm_readable_docs.md](docs/llm_readable_docs.md) |
+| Agent prompt research patterns | [prompt_engineering/](prompt_engineering/) |
+| Production coding-agent prompts + workflows | [coding_agents/](coding_agents/) — prompts, workflows, review |
+| Machine-readable design specs | [design_docs/design_md_spec.md](design_docs/design_md_spec.md), [templates/DESIGN_DOC.md.template](templates/DESIGN_DOC.md.template) |
+| ADRs + design reviews | [design_docs/adr_guide.md](design_docs/adr_guide.md), [design_docs/design_review.md](design_docs/design_review.md) |
+
+📖 Full migration plan: [MIGRATION_AND_PROVIDER_EXPANSION_PLAN.md](MIGRATION_AND_PROVIDER_EXPANSION_PLAN.md)
+
+---
+
+## Supported LLM providers
+
+The [`utilities/llm_provider.py`](utilities/llm_provider.py) module exposes a single `LLMProvider` interface (and a backwards-compatible `complete()` function). Switch via `LLM_PROVIDER` without touching agent code; route automatically with [`ProviderRouter`](utilities/provider_router.py).
+
+24+ providers across frontier / fast / marketplace / enterprise / specialty / local. See:
+
+- [providers/provider_matrix.md](providers/provider_matrix.md) — capability comparison
+- [providers/env_vars.md](providers/env_vars.md) — every variable
+- [.env.example](.env.example) — copy-and-fill
 
 ---
 
 ## Contributing
 
-Contributions are welcome! Please open an issue or PR. Ensure new entries are permissively licensed (MIT/Apache-2.0) and well-documented.
+Contributions are very welcome — new examples, framework updates, fixes, and translations all help. Start with:
 
----
+- [CONTRIBUTING.md](CONTRIBUTING.md) — workflow, scope, quality bar
+- [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
+- [.github/ISSUE_TEMPLATE/](.github/ISSUE_TEMPLATE/)
+- [checklists/open_source_quality_checklist.md](checklists/open_source_quality_checklist.md)
+
+## Roadmap & changelog
+
+- [ROADMAP.md](ROADMAP.md) — what's next
+- [CHANGELOG.md](CHANGELOG.md) — what shipped
 
 ## License
 
 MIT — see [LICENSE](LICENSE).
 
----
-
 ## Maintainer
 
-Curated & maintained by **Sayed Allam** ([oxbshw](https://github.com/oxbshw)). If you find this helpful, please ⭐ star the repo and share feedback via issues/PRs.
+Curated & maintained by **Sayed Allam** ([oxbshw](https://github.com/oxbshw)). If this handbook helped you ship, please ⭐ the repo and open a PR with what *you* learned along the way.

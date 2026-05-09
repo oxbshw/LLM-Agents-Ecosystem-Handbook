@@ -1,0 +1,33 @@
+# TOOLS.md
+
+> Tool inventory with risk levels and approval gates. Every tool the agent can invoke must appear here.
+
+## Tools
+
+| Tool | Purpose | Inputs | Risk | Approval | Notes |
+|---|---|---|---|---|---|
+| `{{tool_name}}` | {{what it does}} | {{schema}} | Low | none | {{...}} |
+| `{{tool_name}}` | {{...}} | {{...}} | Medium | sometimes | {{...}} |
+| `{{tool_name}}` | {{...}} | {{...}} | High | required | {{...}} |
+| `{{tool_name}}` | {{...}} | {{...}} | Critical | always + 2nd reviewer | {{...}} |
+
+## Risk levels (reference)
+
+| Level | Examples |
+|---|---|
+| Low | read-only search, summarization |
+| Medium | drafting files, creating tickets |
+| High | sending email, modifying repos, running shell |
+| Critical | deleting data, spending money, changing permissions |
+
+## Restricted (never, without explicit user request)
+- {{e.g., `git push --force`, `rm -rf`}}
+- {{...}}
+
+## Failure handling
+- Tool errors must be returned as structured `{ "error": "...", "retryable": bool }`
+- After {{N=2}} retries on the same tool, surface the error and stop
+- Never silently swallow tool failures
+
+## Approval mechanism
+Approvals are requested via {{mechanism — e.g., "writing to `logs/approvals/pending.json` and pausing the run"}}. Auto-approval on timeout is **not allowed**.

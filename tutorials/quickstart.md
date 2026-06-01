@@ -41,7 +41,7 @@ The handbook ships an `LLMProvider` abstraction across 24+ providers. Pick by ne
 | Cheap classification | Groq, DeepSeek, OpenRouter cheap variants |
 | Strong reasoning | Anthropic, OpenAI, Google Gemini |
 | Fastest latency | Groq, Cerebras |
-| Long context | Google Gemini Pro, Anthropic, MiniMax (204K) |
+| Long context | Google Gemini Pro, Anthropic, MiniMax (M3, 512K) |
 | Local / privacy | Ollama, LM Studio, vLLM |
 | Vision | OpenAI, Google, Anthropic, xAI |
 | Web-grounded research | Perplexity |

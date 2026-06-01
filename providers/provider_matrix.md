@@ -33,7 +33,7 @@ Capability comparison. **Verify against upstream docs** — capabilities ship an
 | Hugging Face | specialty | ✅ | 🟡 | 🟡 | 🟡 | ✅ | 🟡 | 🔧 | `openai` |
 | Replicate | specialty | ✅ | ❌ | ❌ | ✅ | ❌ | 🟡 | ❌ | predict-style (stub) |
 | NVIDIA NIM | specialty | ✅ | ✅ | 🟡 | 🟡 | ✅ | 🟡 | 🔧 | `openai` |
-| MiniMax | specialty | ✅ | 🟡 | 🟡 | ❌ | ❌ | ✅ (204K) | 🔧 | `openai` |
+| MiniMax | specialty | ✅ | 🟡 | 🟡 | ❌ | ❌ | ✅ (512K with M3) | 🔧 | `openai` |
 
 ## Local runtimes
 
@@ -52,7 +52,7 @@ Capability comparison. **Verify against upstream docs** — capabilities ship an
 | Cheap classification / extraction | Groq, DeepSeek | Together, OpenRouter |
 | Top-shelf reasoning + tool use | Anthropic, OpenAI | Google Gemini |
 | Lowest latency | Groq, Cerebras | Fireworks |
-| Long-context analysis | Google Gemini, Anthropic | MiniMax (204K) |
+| Long-context analysis | Google Gemini, Anthropic | MiniMax (M3, 512K) |
 | Vision tasks | OpenAI, Google, Anthropic | xAI |
 | Real-time web search built in | Perplexity | (build it yourself) |
 | Embeddings | OpenAI, Cohere, Mistral | Together |

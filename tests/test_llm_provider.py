@@ -9,7 +9,7 @@ Unit tests cover:
 - Unknown provider raises ValueError
 
 Integration tests (skipped when keys are absent) cover:
-- Live MiniMax M2.7 call returns a non-empty string
+- Live MiniMax M3 call returns a non-empty string
 - Live OpenAI call returns a non-empty string
 """
 
@@ -197,7 +197,7 @@ class TestCompleteMiniMax:
             call_kwargs = mock_instance.chat.completions.create.call_args.kwargs
             assert call_kwargs["temperature"] > 0.0
 
-    def test_default_model_is_m27(self, monkeypatch):
+    def test_default_model_is_m3(self, monkeypatch):
         monkeypatch.setenv("MINIMAX_API_KEY", "test-key-minimax")
         mock_client_cls = MagicMock()
         mock_instance = MagicMock()
@@ -209,7 +209,7 @@ class TestCompleteMiniMax:
             importlib.reload(llm_provider)
             llm_provider.complete("hi", provider="minimax")
             call_kwargs = mock_instance.chat.completions.create.call_args.kwargs
-            assert call_kwargs["model"] == "MiniMax-M2.7"
+            assert call_kwargs["model"] == "MiniMax-M3"
 
     def test_custom_model_respected(self, monkeypatch):
         monkeypatch.setenv("MINIMAX_API_KEY", "test-key-minimax")
@@ -253,6 +253,17 @@ class TestCompleteAnthropic:
     reason="MINIMAX_API_KEY not set — skipping live MiniMax integration test",
 )
 class TestMiniMaxIntegration:
+    def test_live_m3_returns_nonempty_string(self):
+        from utilities.llm_provider import complete
+        result = complete(
+            "In one sentence, what is the main advantage of multi-agent LLM systems?",
+            provider="minimax",
+            model="MiniMax-M3",
+            max_tokens=64,
+        )
+        assert isinstance(result, str)
+        assert len(result) > 0
+
     def test_live_m27_returns_nonempty_string(self):
         from utilities.llm_provider import complete
         result = complete(
@@ -280,7 +291,7 @@ class TestMiniMaxIntegration:
         result = complete(
             "What are you?",
             provider="minimax",
-            model="MiniMax-M2.7",
+            model="MiniMax-M3",
             system="You are a helpful assistant that always begins answers with 'AGENT:'.",
             max_tokens=64,
         )

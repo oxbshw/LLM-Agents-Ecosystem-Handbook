@@ -28,7 +28,7 @@ Rough comparison. **Verify against current pricing pages before betting producti
 | Tier | Range | Examples |
 |---|---|---|
 | Standard | 16K – 32K | Older / smaller models |
-| Long | 100K – 200K | Anthropic, OpenAI flagship, MiniMax (204K) |
+| Long | 100K – 500K | Anthropic, OpenAI flagship, MiniMax (M3, 512K) |
 | Very long | 1M+ | Gemini 1.5 Pro, Gemini 2.x |
 
 ## Mixing cost and latency

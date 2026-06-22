@@ -18,7 +18,7 @@ A condensed view for LLM navigation. Full matrix lives at [`/providers/provider_
 - Cheap classification → Groq, DeepSeek, OpenRouter cheap variants
 - Top reasoning → Anthropic, OpenAI flagship, Google Pro
 - Lowest latency → Groq, Cerebras
-- Long context → Google Gemini, Anthropic, MiniMax (204K)
+- Long context → Google Gemini, Anthropic, MiniMax (M3, 512K)
 - Vision → OpenAI, Google, Anthropic, xAI
 - Real-time web grounded → Perplexity
 - Embeddings → OpenAI, Cohere, Mistral

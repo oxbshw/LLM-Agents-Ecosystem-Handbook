@@ -241,10 +241,10 @@ PROVIDERS: dict[str, ProviderInfo] = {
         display_name="MiniMax",
         api_key_env="MINIMAX_API_KEY",
         default_base_url="https://api.minimax.io/v1",
-        default_model="MiniMax-M2.7",
+        default_model="MiniMax-M3",
         family="specialty",
         capabilities=_C(CHAT, STREAMING, LONG_CONTEXT),
-        notes="204K context. Temperature must be > 0.",
+        notes="MiniMax-M3 default (512K context); MiniMax-M2.7 / MiniMax-M2.7-highspeed available. Temperature must be > 0.",
     ),
     # --- Local ---
     "ollama": ProviderInfo(

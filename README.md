@@ -81,6 +81,8 @@ The handbook ships an `LLMProvider` abstraction with **24+ providers** across si
 | **Specialty** | xAI, Perplexity, Mistral, Cohere, DeepSeek, Hugging Face, Replicate, NVIDIA NIM, MiniMax | Domain-specific |
 | **Local runtimes** | Ollama, LM Studio, vLLM, llama.cpp | Privacy, cost control, offline dev |
 
+If you want a governed OpenAI-compatible control plane in front of those providers, [Tuning Engines](https://www.tuningengines.com) is a useful runtime option for policy enforcement, approval gates, MCP and agent tracing, and usage or cost visibility without changing the surrounding agent framework.
+
 Quick start:
 
 ```python
